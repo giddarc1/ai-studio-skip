@@ -128,20 +128,20 @@ const ProjectsWorkflow = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="bg-card rounded-2xl p-8 shadow-card max-w-3xl mx-auto">
-          <div className="text-center mb-6">
-            <h3 className="text-2xl font-bold text-foreground mb-3">
+        <div className="bg-card rounded-2xl p-4 shadow-card max-w-2xl mx-auto">
+          <div className="text-center mb-4">
+            <h3 className="text-xl font-bold text-foreground mb-2">
               Ready to Start Your Project?
             </h3>
-            <p className="text-muted-foreground mb-4">
+            <p className="text-muted-foreground mb-3">
               Login to access the full Projects workflow and collaborate with your team
             </p>
-            <div className="mb-6">
+            <div className="mb-4">
               <Button variant="outline" size="sm" className="border-primary/30 text-primary hover:bg-primary/10">
                 Learn More
               </Button>
             </div>
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center">
               <Button size="lg" className="bg-gradient-primary hover:opacity-90">
                 Login to Get Started
               </Button>
