@@ -116,35 +116,35 @@ const ProjectsWorkflow = () => {
           </div>
         </div>
 
-        {/* Combined CTA and Team Collaboration */}
-        <div className="bg-card rounded-2xl p-6 shadow-card max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-6 items-center">
-            {/* CTA Section */}
-            <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold text-foreground mb-2">
-                Ready to Start Your Project?
-              </h3>
-              <p className="text-muted-foreground mb-4 text-sm">
-                Login to access the full workflow and collaborate with your team
-              </p>
-              <div className="flex flex-col sm:flex-row gap-2">
-                <Button className="bg-gradient-primary hover:opacity-90">
-                  Login to Get Started
-                </Button>
-                <Button variant="outline" size="sm">
-                  Learn More
-                </Button>
-              </div>
+        {/* Call to Action */}
+        <div className="bg-card rounded-2xl p-8 shadow-card max-w-3xl mx-auto">
+          <div className="text-center mb-6">
+            <h3 className="text-2xl font-bold text-foreground mb-3">
+              Ready to Start Your Project?
+            </h3>
+            <p className="text-muted-foreground mb-6">
+              Login to access the full Projects workflow and collaborate with your team
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
+              <Button size="lg" className="bg-gradient-primary hover:opacity-90">
+                Login to Get Started
+              </Button>
+              <Button variant="outline" size="lg">
+                Learn More
+              </Button>
             </div>
-            
-            {/* Team Collaboration */}
-            <div className="text-center">
-              <UserPlus className="h-10 w-10 text-primary mx-auto mb-3" />
-              <h4 className="font-semibold text-foreground mb-2">Team Collaboration</h4>
-              <p className="text-sm text-muted-foreground">
-                Invite team members, share feedback, and work together on perfect photoshoot images.
-              </p>
+          </div>
+          
+          {/* Team Collaboration - Integrated */}
+          <div className="border-t border-border/30 pt-6">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <UserPlus className="h-6 w-6 text-primary" />
+              <h4 className="text-lg font-semibold text-foreground">Team Collaboration</h4>
             </div>
+            <p className="text-sm text-muted-foreground text-center max-w-2xl mx-auto">
+              Invite team members, share feedback, and work together on creating the perfect photoshoot images. 
+              Each project supports multiple collaborators with real-time updates.
+            </p>
           </div>
         </div>
       </div>
