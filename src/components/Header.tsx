@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Camera, User } from "lucide-react";
+import { User } from "lucide-react";
+import jewelstudioLogo from "@/assets/jewelstudio-logo.png";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -17,11 +18,13 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-premium rounded-lg flex items-center justify-center">
-              <Camera className="w-5 h-5 text-premium-foreground" />
-            </div>
-            <span className="text-xl font-bold text-foreground">PhotoAI</span>
+          <div className="flex items-center gap-3">
+            <img 
+              src={jewelstudioLogo} 
+              alt="Jewelstudio Logo" 
+              className="w-10 h-10 object-contain"
+            />
+            <span className="text-xl font-bold text-foreground">Jewelstudio</span>
           </div>
 
           {/* Navigation Menu */}
