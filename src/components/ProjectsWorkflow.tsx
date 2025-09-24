@@ -125,11 +125,11 @@ const ProjectsWorkflow = () => {
             <p className="text-muted-foreground mb-6">
               Login to access the full Projects workflow and collaborate with your team
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
-              <Button size="lg" className="bg-gradient-primary hover:opacity-90">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-8">
+              <Button size="lg" className="bg-gradient-primary hover:opacity-90 h-12">
                 Login to Get Started
               </Button>
-              <Button variant="outline" size="lg" className="border-primary/30 text-primary hover:bg-primary/10">
+              <Button variant="outline" size="lg" className="border-primary/30 text-primary hover:bg-primary/10 h-12">
                 Learn More
               </Button>
             </div>
