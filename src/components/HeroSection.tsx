@@ -89,12 +89,20 @@ const HeroSection = () => {
           </div>
         </div>
         
-        {/* Enhanced Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="flex flex-col items-center gap-2">
-            <div className="text-xs text-muted-foreground">Scroll to explore</div>
-            <div className="w-6 h-10 border-2 border-accent/50 rounded-full flex justify-center backdrop-blur-sm">
-              <div className="w-1 h-3 bg-accent/50 rounded-full mt-2 animate-pulse"></div>
+        {/* Feature Highlights */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="flex items-center gap-8 px-6 py-3 bg-background/80 backdrop-blur-md rounded-full border border-border/30">
+            <div className="flex items-center gap-2 text-sm">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-muted-foreground">AI Processing</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Zap className="w-4 h-4 text-accent" />
+              <span className="text-muted-foreground">Instant Results</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Camera className="w-4 h-4 text-premium" />
+              <span className="text-muted-foreground">Studio Quality</span>
             </div>
           </div>
         </div>
