@@ -129,7 +129,7 @@ const ProjectsWorkflow = () => {
               <Button size="lg" className="bg-gradient-primary hover:opacity-90">
                 Login to Get Started
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" className="border-primary/30 text-primary hover:bg-primary/10">
                 Learn More
               </Button>
             </div>
