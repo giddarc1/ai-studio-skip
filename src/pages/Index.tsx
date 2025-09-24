@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import BrandRibbon from "@/components/BrandRibbon";
 import BeforeAfterGallery from "@/components/BeforeAfterGallery";
@@ -12,6 +13,7 @@ const Index = () => {
       <title>AI Product Photography | Studio-Quality Images Without the Studio</title>
       <meta name="description" content="Transform ordinary product photos into stunning marketing visuals with AI. Perfect for jewelry, apparel, and consumer brands. Start creating professional images today." />
       
+      <Header />
       <main className="min-h-screen">
         <HeroSection />
         <BrandRibbon />

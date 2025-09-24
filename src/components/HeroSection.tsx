@@ -8,7 +8,7 @@ import electronicsAfter from "@/assets/electronics-after.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-background">
+    <section className="relative min-h-screen overflow-hidden bg-background pt-16">
       {/* Hero Background Image - Right Side Only */}
       <div 
         className="absolute top-0 right-0 w-3/5 h-full bg-cover bg-left bg-no-repeat"
