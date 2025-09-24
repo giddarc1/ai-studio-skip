@@ -1,30 +1,37 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import jewelryBefore from "@/assets/jewelry-before.jpg";
+import jewelryAfter from "@/assets/jewelry-after.jpg";
+import apparelBefore from "@/assets/apparel-before.jpg";
+import apparelAfter from "@/assets/apparel-after.jpg";
+import accessoriesBefore from "@/assets/accessories-before.jpg";
+import accessoriesAfter from "@/assets/accessories-after.jpg";
+import electronicsBefore from "@/assets/electronics-before.jpg";
+import electronicsAfter from "@/assets/electronics-after.jpg";
 
 const BeforeAfterGallery = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   
-  // Mock data - you would replace these with actual before/after images
   const examples = [
     {
-      before: "/placeholder.svg",
-      after: "/placeholder.svg",
+      before: jewelryBefore,
+      after: jewelryAfter,
       category: "Jewelry"
     },
     {
-      before: "/placeholder.svg", 
-      after: "/placeholder.svg",
+      before: apparelBefore, 
+      after: apparelAfter,
       category: "Apparel"
     },
     {
-      before: "/placeholder.svg",
-      after: "/placeholder.svg", 
+      before: accessoriesBefore,
+      after: accessoriesAfter, 
       category: "Accessories"
     },
     {
-      before: "/placeholder.svg",
-      after: "/placeholder.svg",
+      before: electronicsBefore,
+      after: electronicsAfter,
       category: "Electronics"
     }
   ];
