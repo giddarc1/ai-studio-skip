@@ -4,6 +4,7 @@ import heroComparison from "@/assets/hero-comparison.jpg";
 import jewelryAfter from "@/assets/jewelry-after.jpg";
 import jewelryHeroBanner from "@/assets/jewelry-hero-banner.jpg";
 import jewelryUseCasesBanner from "@/assets/jewelry-use-cases-banner.jpg";
+import jewelryTransformationHero from "@/assets/jewelry-transformation-hero.jpg";
 import apparelAfter from "@/assets/apparel-after.jpg";
 import accessoriesAfter from "@/assets/accessories-after.jpg";
 import electronicsAfter from "@/assets/electronics-after.jpg";
@@ -14,7 +15,7 @@ const HeroSection = () => {
       {/* Hero Background Image - Right Side Only */}
       <div 
         className="absolute top-0 right-0 w-3/5 h-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${jewelryUseCasesBanner})` }}
+        style={{ backgroundImage: `url(${jewelryTransformationHero})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/10 to-background/60" />
       </div>
