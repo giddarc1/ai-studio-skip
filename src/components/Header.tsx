@@ -21,7 +21,7 @@ const Header = () => {
             <div className="w-8 h-8 bg-gradient-premium rounded-lg flex items-center justify-center">
               <Camera className="w-5 h-5 text-premium-foreground" />
             </div>
-            <span className="text-xl font-bold text-foreground">PhotoAI</span>
+            <span className="text-xl font-bold text-foreground">JewelStudio</span>
           </div>
 
           {/* Navigation Menu */}
