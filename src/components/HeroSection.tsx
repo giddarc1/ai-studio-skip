@@ -1,20 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { Sparkles, Camera, Zap, ArrowRight } from "lucide-react";
 import heroComparison from "@/assets/hero-comparison.jpg";
+import jewelryAfter from "@/assets/jewelry-after.jpg";
+import apparelAfter from "@/assets/apparel-after.jpg";
+import accessoriesAfter from "@/assets/accessories-after.jpg";
+import electronicsAfter from "@/assets/electronics-after.jpg";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Hero Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-right-top bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-right bg-no-repeat"
         style={{ backgroundImage: `url(${heroComparison})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/75 to-background/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent" />
       </div>
       
       {/* Additional Text Background for Better Readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-transparent to-transparent lg:to-background/10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background/50 via-transparent to-transparent lg:from-background/20" />
       
       {/* Content Container */}
       <div className="relative z-10 container mx-auto px-6">
@@ -84,6 +88,17 @@ const HeroSection = () => {
               <div className="absolute top-1/4 right-1/4 w-3 h-3 bg-premium/60 rounded-full animate-pulse" />
               <div className="absolute bottom-1/3 right-1/3 w-2 h-2 bg-accent/60 rounded-full animate-pulse delay-1000" />
               <div className="absolute top-1/2 right-1/6 w-4 h-4 bg-premium/40 rounded-full animate-pulse delay-2000" />
+            </div>
+
+            {/* Examples panel */}
+            <div className="absolute bottom-8 right-8">
+              <div className="grid grid-cols-2 gap-3 bg-background/70 backdrop-blur-md p-3 rounded-2xl border border-border/50 shadow-hero">
+                <img src={jewelryAfter} alt="AI-generated jewelry product image example" className="w-28 h-20 object-cover rounded-lg border border-border/50 shadow-card" loading="lazy" />
+                <img src={apparelAfter} alt="AI-generated apparel product image example" className="w-28 h-20 object-cover rounded-lg border border-border/50 shadow-card" loading="lazy" />
+                <img src={accessoriesAfter} alt="AI-generated accessories product image example" className="w-28 h-20 object-cover rounded-lg border border-border/50 shadow-card" loading="lazy" />
+                <img src={electronicsAfter} alt="AI-generated electronics product image example" className="w-28 h-20 object-cover rounded-lg border border-border/50 shadow-card" loading="lazy" />
+              </div>
+              <p className="mt-2 text-xs text-muted-foreground text-right">Multiple AI‑enhanced examples</p>
             </div>
           </div>
         </div>
