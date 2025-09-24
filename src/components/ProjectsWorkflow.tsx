@@ -75,9 +75,20 @@ const ProjectsWorkflow = () => {
           </p>
           
           {/* Login Status Banner */}
-          <div className="inline-flex items-center gap-2 bg-muted/50 border border-border rounded-lg px-4 py-2 text-sm text-muted-foreground">
+          <div className="inline-flex items-center gap-2 bg-muted/50 border border-border rounded-lg px-4 py-2 text-sm text-muted-foreground mb-6">
             <Lock className="h-4 w-4" />
             <span>Login required to access Projects workflow</span>
+          </div>
+
+          {/* Team Collaboration */}
+          <div className="bg-card/30 rounded-lg p-4 max-w-lg mx-auto">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <UserPlus className="h-5 w-5 text-primary" />
+              <h4 className="text-base font-semibold text-foreground">Team Collaboration</h4>
+            </div>
+            <p className="text-sm text-muted-foreground text-center">
+              Invite team members, share feedback, and work together on creating the perfect photoshoot images.
+            </p>
           </div>
         </div>
 
@@ -135,18 +146,6 @@ const ProjectsWorkflow = () => {
                 Login to Get Started
               </Button>
             </div>
-          </div>
-          
-          {/* Team Collaboration - Integrated */}
-          <div className="border-t border-border/30 pt-6">
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <UserPlus className="h-6 w-6 text-primary" />
-              <h4 className="text-lg font-semibold text-foreground">Team Collaboration</h4>
-            </div>
-            <p className="text-sm text-muted-foreground text-center max-w-2xl mx-auto">
-              Invite team members, share feedback, and work together on creating the perfect photoshoot images. 
-              Each project supports multiple collaborators with real-time updates.
-            </p>
           </div>
         </div>
       </div>
