@@ -1,5 +1,4 @@
 import HeroSection from "@/components/HeroSection";
-import BrandRibbon from "@/components/BrandRibbon";
 import BeforeAfterGallery from "@/components/BeforeAfterGallery";
 import BenefitsGrid from "@/components/BenefitsGrid";
 import HowItWorks from "@/components/HowItWorks";
@@ -14,7 +13,6 @@ const Index = () => {
       
       <main className="min-h-screen">
         <HeroSection />
-        <BrandRibbon />
         <BeforeAfterGallery />
         <BenefitsGrid />
         <HowItWorks />
