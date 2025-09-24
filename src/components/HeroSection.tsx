@@ -12,7 +12,7 @@ const HeroSection = () => {
       {/* Hero Background Image - Right Side Only */}
       <div 
         className="absolute top-0 right-0 w-3/5 h-full bg-cover bg-left bg-no-repeat"
-        style={{ backgroundImage: `url(${heroComparison})` }}
+        style={{ backgroundImage: `url(${jewelryAfter})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/10 to-background/60" />
       </div>
