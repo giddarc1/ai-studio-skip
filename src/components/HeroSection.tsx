@@ -1,90 +1,94 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles, Camera, Zap } from "lucide-react";
+import { Sparkles, Camera, Zap, ArrowRight } from "lucide-react";
 import heroComparison from "@/assets/hero-comparison.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
       {/* Hero Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroComparison})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-background/30 via-background/15 to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent" />
       </div>
       
-      {/* Subtle Ambient Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
+      {/* Content Container */}
+      <div className="relative z-10 container mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen py-20">
+          {/* Left Column - Main Content */}
+          <div className="space-y-8">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-premium/10 border border-premium/20 rounded-full px-6 py-3 backdrop-blur-sm animate-fade-in">
+              <Sparkles className="w-5 h-5 text-premium" />
+              <span className="text-sm font-semibold text-premium">AI-Powered Studio</span>
+            </div>
 
-      {/* Floating Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Geometric Shapes */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-premium/20 to-accent/20 rounded-full blur-xl animate-pulse" />
-        <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-accent/20 to-premium/20 rounded-full blur-xl animate-pulse delay-1000" />
-        <div className="absolute bottom-32 left-20 w-40 h-40 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl animate-pulse delay-2000" />
-        
-        {/* Floating Icons */}
-        <div className="absolute top-32 right-1/4 animate-float">
-          <Camera className="w-8 h-8 text-accent/40" />
-        </div>
-        <div className="absolute bottom-40 left-1/4 animate-float delay-1000">
-          <Sparkles className="w-6 h-6 text-premium/40" />
-        </div>
-        <div className="absolute top-1/2 right-10 animate-float delay-2000">
-          <Zap className="w-7 h-7 text-accent/40" />
-        </div>
-      </div>
-      
-      {/* Main Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center">
-        <div className="max-w-5xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-premium/10 border border-premium/20 rounded-full px-4 py-2 mb-8 backdrop-blur-sm animate-fade-in">
-            <Sparkles className="w-4 h-4 text-premium" />
-            <span className="text-sm font-medium text-premium">AI-Powered Studio</span>
-          </div>
-
-          {/* Main Headline */}
-          <h1 className="text-6xl md:text-8xl font-bold leading-tight mb-8 animate-fade-in delay-200">
-            <span className="bg-gradient-to-r from-foreground via-accent to-premium bg-clip-text text-transparent">
-              Next-Gen Product
-            </span>
-            <br />
-            <span className="text-foreground">Photography—</span>
-            <br />
-            <span className="text-accent font-light italic">No Studio Required</span>
-          </h1>
-          
-          {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in delay-400">
-            Create stunning visuals for jewelry, apparel, and more—at a fraction of traditional photoshoot costs.
-          </p>
-
-          {/* CTA Section */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16 animate-fade-in delay-600">
-            <Button size="lg" className="bg-gradient-premium hover:shadow-premium text-premium-foreground px-8 py-4 text-lg font-semibold shadow-lg hover:scale-105 transition-all duration-300">
-              <Sparkles className="w-5 h-5 mr-2" />
-              Start Creating Images
-            </Button>
+            {/* Main Headline */}
+            <div className="animate-fade-in delay-200">
+              <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
+                <span className="block text-foreground">Next-Gen</span>
+                <span className="block bg-gradient-to-r from-premium to-accent bg-clip-text text-transparent">
+                  Product Photography
+                </span>
+                <span className="block text-foreground text-4xl lg:text-5xl font-light">
+                  —No Studio Required
+                </span>
+              </h1>
+            </div>
             
-            <Button variant="outline" size="lg" className="border-accent/30 text-accent hover:bg-accent/10 px-8 py-4 text-lg font-semibold backdrop-blur-sm">
-              Watch Demo
-            </Button>
+            {/* Subheadline */}
+            <p className="text-lg lg:text-xl text-muted-foreground max-w-xl leading-relaxed animate-fade-in delay-400">
+              Transform ordinary product photos into stunning marketing visuals with AI. Perfect for jewelry, apparel, and consumer brands—at a fraction of traditional photoshoot costs.
+            </p>
+
+            {/* Stats Row */}
+            <div className="flex flex-wrap gap-8 animate-fade-in delay-500">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-premium">10X</div>
+                <div className="text-sm text-muted-foreground">Faster</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-accent">90%</div>
+                <div className="text-sm text-muted-foreground">Cost Savings</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-premium">24/7</div>
+                <div className="text-sm text-muted-foreground">Available</div>
+              </div>
+            </div>
+
+            {/* CTA Section */}
+            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in delay-600">
+              <Button size="lg" className="bg-gradient-premium hover:shadow-premium text-premium-foreground px-8 py-4 text-lg font-semibold shadow-lg hover:scale-105 transition-all duration-300 group">
+                <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+                Start Creating Images
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              
+              <Button variant="outline" size="lg" className="border-accent/30 text-accent hover:bg-accent/5 px-8 py-4 text-lg font-semibold backdrop-blur-sm">
+                Watch Demo
+              </Button>
+            </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto animate-fade-in delay-800">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-premium mb-2">10X</div>
-              <div className="text-sm text-muted-foreground">Faster Production</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-accent mb-2">90%</div>
-              <div className="text-sm text-muted-foreground">Cost Reduction</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-premium mb-2">24/7</div>
-              <div className="text-sm text-muted-foreground">Always Available</div>
+          {/* Right Column - Visual Elements */}
+          <div className="relative lg:block hidden">
+            {/* Floating Elements */}
+            <div className="absolute inset-0">
+              <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-premium/20 to-accent/20 rounded-full blur-xl animate-pulse" />
+              <div className="absolute bottom-32 right-10 w-32 h-32 bg-gradient-to-br from-accent/20 to-premium/20 rounded-full blur-xl animate-pulse delay-1000" />
+              
+              {/* Floating Icons */}
+              <div className="absolute top-32 right-20 animate-float">
+                <Camera className="w-8 h-8 text-accent/60" />
+              </div>
+              <div className="absolute bottom-40 left-16 animate-float delay-1000">
+                <Sparkles className="w-6 h-6 text-premium/60" />
+              </div>
+              <div className="absolute top-1/2 right-8 animate-float delay-2000">
+                <Zap className="w-7 h-7 text-accent/60" />
+              </div>
             </div>
           </div>
         </div>
