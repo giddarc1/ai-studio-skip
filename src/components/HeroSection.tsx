@@ -8,7 +8,7 @@ import electronicsAfter from "@/assets/electronics-after.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-background">
+    <section className="relative h-[70vh] overflow-hidden bg-background">
       {/* Hero Background Image - Right Side Only */}
       <div 
         className="absolute top-0 right-0 w-3/5 h-full bg-cover bg-left bg-no-repeat"
@@ -21,7 +21,7 @@ const HeroSection = () => {
       <div className="absolute top-0 left-0 w-2/5 h-full bg-background" />
       
       {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-6 h-screen flex items-center">
+      <div className="relative z-10 container mx-auto px-6 h-full flex items-center">
         <div className="grid grid-cols-5 gap-12 items-center w-full">
           {/* Left Column - Main Content (Takes 2 columns) */}
           <div className="col-span-2 space-y-8 pr-8">
