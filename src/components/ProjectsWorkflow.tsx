@@ -122,14 +122,14 @@ const ProjectsWorkflow = () => {
             <h3 className="text-2xl font-bold text-foreground mb-3">
               Ready to Start Your Project?
             </h3>
-            <div className="mb-4">
+            <p className="text-muted-foreground mb-4">
+              Login to access the full Projects workflow and collaborate with your team
+            </p>
+            <div className="mb-6">
               <Button variant="outline" size="sm" className="border-primary/30 text-primary hover:bg-primary/10">
                 Learn More
               </Button>
             </div>
-            <p className="text-muted-foreground mb-6">
-              Login to access the full Projects workflow and collaborate with your team
-            </p>
             <div className="flex justify-center mb-8">
               <Button size="lg" className="bg-gradient-primary hover:opacity-90">
                 Login to Get Started
