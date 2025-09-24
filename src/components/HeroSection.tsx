@@ -81,20 +81,6 @@ const HeroSection = () => {
 
           {/* Right Area - Image Showcase (Takes 3 columns) */}
           <div className="col-span-3 relative h-full flex items-center justify-end">
-            {/* Image Overlay Content */}
-            <div className="absolute top-1/2 right-8 transform -translate-y-1/2 z-20">
-              <div className="bg-background/90 backdrop-blur-xl p-6 rounded-2xl border border-border/50 shadow-hero max-w-xs">
-                <h3 className="text-lg font-semibold text-foreground mb-3">Multiple Examples</h3>
-                <div className="grid grid-cols-2 gap-3 mb-4">
-                  <img src={jewelryAfter} alt="AI jewelry transformation" className="w-20 h-16 object-cover rounded-lg border border-border/50 shadow-sm" loading="lazy" />
-                  <img src={apparelAfter} alt="AI apparel transformation" className="w-20 h-16 object-cover rounded-lg border border-border/50 shadow-sm" loading="lazy" />
-                  <img src={accessoriesAfter} alt="AI accessories transformation" className="w-20 h-16 object-cover rounded-lg border border-border/50 shadow-sm" loading="lazy" />
-                  <img src={electronicsAfter} alt="AI electronics transformation" className="w-20 h-16 object-cover rounded-lg border border-border/50 shadow-sm" loading="lazy" />
-                </div>
-                <p className="text-sm text-muted-foreground">Jewelry • Apparel • Tech • More</p>
-              </div>
-            </div>
-
             {/* Minimal floating accents */}
             <div className="absolute inset-0">
               <div className="absolute top-1/4 right-1/3 w-2 h-2 bg-premium/40 rounded-full animate-pulse" />
