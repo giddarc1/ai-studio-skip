@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Sparkles, Camera, Zap, ArrowRight } from "lucide-react";
 import heroComparison from "@/assets/hero-comparison.jpg";
 import jewelryAfter from "@/assets/jewelry-after.jpg";
+import jewelryHeroBanner from "@/assets/jewelry-hero-banner.jpg";
 import apparelAfter from "@/assets/apparel-after.jpg";
 import accessoriesAfter from "@/assets/accessories-after.jpg";
 import electronicsAfter from "@/assets/electronics-after.jpg";
@@ -11,8 +12,8 @@ const HeroSection = () => {
     <section className="relative min-h-screen overflow-hidden bg-background pt-16">
       {/* Hero Background Image - Right Side Only */}
       <div 
-        className="absolute top-0 right-0 w-3/5 h-full bg-cover bg-left bg-no-repeat"
-        style={{ backgroundImage: `url(${jewelryAfter})` }}
+        className="absolute top-0 right-0 w-3/5 h-full bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${jewelryHeroBanner})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/10 to-background/60" />
       </div>
