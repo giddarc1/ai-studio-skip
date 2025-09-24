@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Sparkles, Camera, Zap, ArrowRight } from "lucide-react";
-import heroComparison from "@/assets/hero-comparison.jpg";
+import heroBannerAI from "@/assets/hero-banner-ai.jpg";
 import jewelryAfter from "@/assets/jewelry-after.jpg";
 import apparelAfter from "@/assets/apparel-after.jpg";
 import accessoriesAfter from "@/assets/accessories-after.jpg";
@@ -12,7 +12,7 @@ const HeroSection = () => {
       {/* Hero Background Image - Right Side Only */}
       <div 
         className="absolute top-0 right-0 w-3/5 h-full bg-cover bg-left bg-no-repeat"
-        style={{ backgroundImage: `url(${heroComparison})` }}
+        style={{ backgroundImage: `url(${heroBannerAI})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/10 to-background/60" />
       </div>
