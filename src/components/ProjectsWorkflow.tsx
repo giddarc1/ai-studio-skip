@@ -20,203 +20,131 @@ const ProjectsWorkflow = () => {
   const workflowSteps = [
     {
       id: 1,
-      title: "Brief & Concept Development",
-      description: "Upload mood boards, style frames, color palettes, sample poses and location inspiration",
+      title: "Brief & Concept",
+      description: "Upload mood boards, style frames, and inspiration",
       icon: Palette,
-      details: [
-        "Mood boards & inspiration",
-        "Style frames & references", 
-        "Color palettes",
-        "Sample poses",
-        "Location concepts"
-      ],
-      mockups: ["mood-board.jpg", "color-palette.jpg", "style-frame.jpg"]
+      details: ["Mood boards", "Style frames", "Color palettes", "Sample poses"]
     },
     {
       id: 2,
       title: "Model Selection",
-      description: "Choose AI-based models or upload actual model images for the photoshoot",
+      description: "Choose AI models or upload custom model photos",
       icon: Users,
-      details: [
-        "Browse AI model library",
-        "Upload custom model photos",
-        "Select multiple models",
-        "Set model preferences"
-      ],
-      mockups: ["ai-models.jpg", "model-upload.jpg"]
+      details: ["AI model library", "Custom uploads", "Multiple selections", "Preferences"]
     },
     {
       id: 3,
       title: "Product Upload",
-      description: "Upload all product images with clean white backgrounds",
+      description: "Upload product images with white backgrounds",
       icon: Upload,
-      details: [
-        "Drag & drop product images",
-        "White background validation",
-        "Image quality check", 
-        "Batch upload support"
-      ],
-      mockups: ["product-upload.jpg", "white-bg-products.jpg"]
+      details: ["Drag & drop", "Background validation", "Quality check", "Batch support"]
     },
     {
       id: 4,
-      title: "AI Image Generation",
-      description: "Generate professional photoshoot images combining products, models, and concepts",
+      title: "AI Generation",
+      description: "Generate professional photoshoot images",
       icon: Sparkles,
-      details: [
-        "AI processes all inputs",
-        "Generates multiple variations",
-        "Applies chosen style & mood",
-        "Creates photoshoot scenes"
-      ],
-      mockups: ["generation-process.jpg", "generated-images.jpg"]
+      details: ["Process inputs", "Multiple variations", "Apply styling", "Create scenes"]
     },
     {
       id: 5,
       title: "Select & Edit",
-      description: "Choose your favorite generated images and refine them with text prompts",
+      description: "Choose favorites and refine with prompts",
       icon: Edit3,
-      details: [
-        "Browse generated images",
-        "Select favorites",
-        "Text-to-edit prompts",
-        "Real-time adjustments"
-      ],
-      mockups: ["image-selection.jpg", "prompt-editing.jpg"]
+      details: ["Browse results", "Select favorites", "Text prompts", "Real-time edits"]
     },
     {
       id: 6,
-      title: "Save & Collaborate",
-      description: "Name your project, save progress, and invite team members to collaborate",
+      title: "Save & Share",
+      description: "Name project and collaborate with team",
       icon: Save,
-      details: [
-        "Name & organize projects",
-        "Save work in progress",
-        "Invite team members",
-        "Version control"
-      ],
-      mockups: ["project-save.jpg", "team-invite.jpg"]
+      details: ["Name projects", "Save progress", "Invite team", "Version control"]
     }
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-secondary/20">
+    <section className="py-12 bg-gradient-to-b from-background to-secondary/20">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
             Projects Workflow
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
             Complete end-to-end photoshoot creation with team collaboration
           </p>
           
           {/* Login Status Banner */}
           <div className="inline-flex items-center gap-2 bg-muted/50 border border-border rounded-lg px-4 py-2 text-sm text-muted-foreground">
             <Lock className="h-4 w-4" />
-            <span>Login required to access full Projects workflow</span>
+            <span>Login required to access Projects workflow</span>
           </div>
         </div>
 
-        {/* Workflow Steps */}
-        <div className="max-w-6xl mx-auto">
-          <div className="grid gap-8">
+        {/* Workflow Steps - Compact Grid */}
+        <div className="max-w-6xl mx-auto mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {workflowSteps.map((step, index) => (
-              <div key={step.id} className="relative">
-                {/* Connection Line */}
-                {index < workflowSteps.length - 1 && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full h-8 w-px bg-gradient-to-b from-primary/50 to-transparent z-0" />
-                )}
+              <Card key={step.id} className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all duration-300">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center">
+                      <step.icon className="h-5 w-5 text-primary-foreground" />
+                    </div>
+                    <span className="text-xs font-medium text-muted-foreground bg-muted/50 px-2 py-1 rounded">
+                      Step {step.id}
+                    </span>
+                  </div>
+                  <CardTitle className="text-lg text-foreground">{step.title}</CardTitle>
+                  <CardDescription className="text-sm text-muted-foreground">
+                    {step.description}
+                  </CardDescription>
+                </CardHeader>
                 
-                <Card className="bg-card/50 backdrop-blur-sm border-border/50 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <CardHeader className="pb-4">
-                    <div className="flex items-center gap-4 mb-2">
-                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center">
-                        <step.icon className="h-6 w-6 text-primary-foreground" />
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-muted-foreground">
-                          Step {step.id}
-                        </span>
-                        {index < workflowSteps.length - 1 && (
-                          <ArrowRight className="h-4 w-4 text-muted-foreground" />
-                        )}
-                      </div>
-                    </div>
-                    <CardTitle className="text-xl text-foreground">{step.title}</CardTitle>
-                    <CardDescription className="text-muted-foreground">
-                      {step.description}
-                    </CardDescription>
-                  </CardHeader>
-                  
-                  <CardContent>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {/* Step Details */}
-                      <div>
-                        <h4 className="font-medium text-foreground mb-3">Key Features:</h4>
-                        <ul className="space-y-2">
-                          {step.details.map((detail, idx) => (
-                            <li key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                              {detail}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      
-                      {/* Visual Mockup Placeholder */}
-                      <div className="bg-muted/30 rounded-lg p-6 border border-dashed border-border">
-                        <div className="flex items-center justify-center h-32">
-                          <div className="text-center">
-                            <Camera className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                            <p className="text-sm text-muted-foreground">
-                              Interface Preview
-                            </p>
-                            <p className="text-xs text-muted-foreground/70 mt-1">
-                              {step.title} Screen
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+                <CardContent className="pt-0">
+                  <ul className="space-y-1">
+                    {step.details.map((detail, idx) => (
+                      <li key={idx} className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <div className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="bg-card rounded-2xl p-8 shadow-card max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-foreground mb-4">
-              Ready to Start Your Project?
-            </h3>
-            <p className="text-muted-foreground mb-6">
-              Login to access the full Projects workflow and collaborate with your team
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button size="lg" className="bg-gradient-primary hover:opacity-90">
-                Login to Get Started
-              </Button>
-              <Button variant="outline" size="lg">
-                Learn More
-              </Button>
+        {/* Combined CTA and Team Collaboration */}
+        <div className="bg-card rounded-2xl p-6 shadow-card max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 items-center">
+            {/* CTA Section */}
+            <div className="text-center md:text-left">
+              <h3 className="text-xl font-bold text-foreground mb-2">
+                Ready to Start Your Project?
+              </h3>
+              <p className="text-muted-foreground mb-4 text-sm">
+                Login to access the full workflow and collaborate with your team
+              </p>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Button className="bg-gradient-primary hover:opacity-90">
+                  Login to Get Started
+                </Button>
+                <Button variant="outline" size="sm">
+                  Learn More
+                </Button>
+              </div>
             </div>
-          </div>
-        </div>
-
-        {/* Team Collaboration Highlight */}
-        <div className="mt-16 bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-8 border border-primary/10">
-          <div className="text-center">
-            <UserPlus className="h-12 w-12 text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-foreground mb-2">
-              Team Collaboration
-            </h3>
-            <p className="text-muted-foreground max-w-lg mx-auto">
-              Invite team members to collaborate on projects, share feedback, and work together 
-              on creating the perfect photoshoot images.
-            </p>
+            
+            {/* Team Collaboration */}
+            <div className="text-center">
+              <UserPlus className="h-10 w-10 text-primary mx-auto mb-3" />
+              <h4 className="font-semibold text-foreground mb-2">Team Collaboration</h4>
+              <p className="text-sm text-muted-foreground">
+                Invite team members, share feedback, and work together on perfect photoshoot images.
+              </p>
+            </div>
           </div>
         </div>
       </div>
