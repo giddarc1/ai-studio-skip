@@ -46,7 +46,7 @@ const HeroSection = () => {
             
             {/* Subheadline */}
             <p className="text-base lg:text-lg text-muted-foreground leading-relaxed animate-fade-in delay-400">
-              Transform ordinary product photos into stunning marketing visuals with AI. Perfect for jewelry, apparel, and consumer brands—at a fraction of traditional photoshoot costs.
+              Turn everyday product shots into stunning marketing visuals—AI-powered and a fraction of photoshoot costs.
             </p>
 
             {/* Stats Row */}
