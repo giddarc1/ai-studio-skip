@@ -7,14 +7,14 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Hero Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroComparison})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/60 to-background/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/30 via-background/15 to-background/30" />
       </div>
       
-      {/* Animated Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+      {/* Subtle Ambient Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
 
       {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden">
