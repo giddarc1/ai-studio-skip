@@ -13,6 +13,22 @@ const BrandRibbon = () => {
   return (
     <section className="py-16 bg-muted/30 border-y border-border/50">
       <div className="container mx-auto px-6">
+        {/* Stats above brands */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 pb-12 border-b border-border/30">
+          <div className="text-center">
+            <div className="text-3xl font-bold text-premium mb-2">2M+</div>
+            <div className="text-sm text-muted-foreground">Images Generated</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-accent mb-2">2K+</div>
+            <div className="text-sm text-muted-foreground">Active Brands</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-premium mb-2">98%</div>
+            <div className="text-sm text-muted-foreground">Satisfaction Rate</div>
+          </div>
+        </div>
+
         <div className="text-center mb-12">
           <p className="text-sm uppercase tracking-wider text-muted-foreground font-medium mb-4">
             Trusted by Leading Brands
@@ -57,22 +73,6 @@ const BrandRibbon = () => {
                 </span>
               </div>
             ))}
-          </div>
-        </div>
-        
-        {/* Stats below brands */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 pt-12 border-t border-border/30">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-premium mb-2">2M+</div>
-            <div className="text-sm text-muted-foreground">Images Generated</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent mb-2">2K+</div>
-            <div className="text-sm text-muted-foreground">Active Brands</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-premium mb-2">98%</div>
-            <div className="text-sm text-muted-foreground">Satisfaction Rate</div>
           </div>
         </div>
       </div>
