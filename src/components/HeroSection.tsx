@@ -5,16 +5,16 @@ import heroComparison from "@/assets/hero-comparison.jpg";
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background animate-pulse" />
-      
       {/* Hero Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
         style={{ backgroundImage: `url(${heroComparison})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-accent/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/60 to-background/80" />
       </div>
+      
+      {/* Animated Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
 
       {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden">
