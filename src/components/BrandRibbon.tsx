@@ -22,25 +22,42 @@ const BrandRibbon = () => {
           </h2>
         </div>
         
-        {/* Brand logos grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center justify-items-center">
-          {brands.map((brand, index) => (
-            <div
-              key={brand.name}
-              className="flex flex-col items-center group hover:scale-105 transition-transform duration-300 animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {/* Logo placeholder - using text-based logos for now */}
-              <div className="w-20 h-12 bg-gradient-to-r from-muted to-muted/50 border border-border/30 rounded-lg flex items-center justify-center mb-2 group-hover:shadow-md transition-shadow">
-                <span className="text-sm font-bold text-foreground/70 tracking-wider">
-                  {brand.name}
+        {/* Brand logos scrollable ribbon */}
+        <div className="relative overflow-hidden">
+          <div className="flex animate-scroll-x space-x-8 py-4">
+            {/* First set of brands */}
+            {brands.map((brand, index) => (
+              <div
+                key={`${brand.name}-1`}
+                className="flex flex-col items-center group hover:scale-105 transition-transform duration-300 flex-shrink-0"
+              >
+                <div className="w-24 h-16 bg-gradient-to-r from-muted to-muted/50 border border-border/30 rounded-lg flex items-center justify-center mb-2 group-hover:shadow-md transition-shadow">
+                  <span className="text-sm font-bold text-foreground/70 tracking-wider">
+                    {brand.name}
+                  </span>
+                </div>
+                <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors whitespace-nowrap">
+                  {brand.category}
                 </span>
               </div>
-              <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors">
-                {brand.category}
-              </span>
-            </div>
-          ))}
+            ))}
+            {/* Duplicate set for seamless scrolling */}
+            {brands.map((brand, index) => (
+              <div
+                key={`${brand.name}-2`}
+                className="flex flex-col items-center group hover:scale-105 transition-transform duration-300 flex-shrink-0"
+              >
+                <div className="w-24 h-16 bg-gradient-to-r from-muted to-muted/50 border border-border/30 rounded-lg flex items-center justify-center mb-2 group-hover:shadow-md transition-shadow">
+                  <span className="text-sm font-bold text-foreground/70 tracking-wider">
+                    {brand.name}
+                  </span>
+                </div>
+                <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors whitespace-nowrap">
+                  {brand.category}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
         
         {/* Stats below brands */}
