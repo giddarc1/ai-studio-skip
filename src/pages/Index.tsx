@@ -1,13 +1,24 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import HeroSection from "@/components/HeroSection";
+import BeforeAfterGallery from "@/components/BeforeAfterGallery";
+import BenefitsGrid from "@/components/BenefitsGrid";
+import HowItWorks from "@/components/HowItWorks";
+import FinalCTA from "@/components/FinalCTA";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      {/* SEO meta tags */}
+      <title>AI Product Photography | Studio-Quality Images Without the Studio</title>
+      <meta name="description" content="Transform ordinary product photos into stunning marketing visuals with AI. Perfect for jewelry, apparel, and consumer brands. Start creating professional images today." />
+      
+      <main className="min-h-screen">
+        <HeroSection />
+        <BeforeAfterGallery />
+        <BenefitsGrid />
+        <HowItWorks />
+        <FinalCTA />
+      </main>
+    </>
   );
 };
 
