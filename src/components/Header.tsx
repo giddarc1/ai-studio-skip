@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Camera, User } from "lucide-react";
-import { Link } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -29,33 +28,27 @@ const Header = () => {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link 
-                    to="/"
-                    className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
-                  >
-                    Home
-                  </Link>
+                <NavigationMenuLink 
+                  className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
+                  href="/"
+                >
+                  Home
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link 
-                    to="/projects"
-                    className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
-                  >
-                    Projects
-                  </Link>
+                <NavigationMenuLink 
+                  className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
+                  href="/projects"
+                >
+                  Projects
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link 
-                    to="/images"
-                    className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
-                  >
-                    Images
-                  </Link>
+                <NavigationMenuLink 
+                  className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
+                  href="/images"
+                >
+                  Images
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>

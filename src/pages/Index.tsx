@@ -3,7 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import BrandRibbon from "@/components/BrandRibbon";
 import BeforeAfterGallery from "@/components/BeforeAfterGallery";
 import BenefitsGrid from "@/components/BenefitsGrid";
-import ProjectsWorkflow from "@/components/ProjectsWorkflow";
+import HowItWorks from "@/components/HowItWorks";
 import FinalCTA from "@/components/FinalCTA";
 
 const Index = () => {
@@ -19,7 +19,7 @@ const Index = () => {
         <BrandRibbon />
         <BeforeAfterGallery />
         <BenefitsGrid />
-        <ProjectsWorkflow />
+        <HowItWorks />
         <FinalCTA />
       </main>
     </>
