@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles, User } from "lucide-react";
+import { User } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   NavigationMenu,
@@ -11,7 +11,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import logoImage from "@/assets/lens-ai-studio-logo.png";
+import lensAIStudioLogo from "@/assets/lens-ai-studio-logo.png";
 
 const Header = () => {
   return (
@@ -19,11 +19,11 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center group">
+          <Link to="/" className="flex items-center gap-2 group">
             <img 
-              src={logoImage} 
-              alt="Lens AI Studio - AI Product Photography Studio" 
-              className="h-12 w-auto transition-all duration-300 group-hover:scale-105"
+              src={lensAIStudioLogo} 
+              alt="Lens AI Studio" 
+              className="h-10 w-auto object-contain transition-all duration-300 group-hover:scale-105"
             />
           </Link>
 
