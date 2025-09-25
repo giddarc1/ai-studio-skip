@@ -22,43 +22,37 @@ const ProjectsWorkflow = () => {
       id: 1,
       title: "Brief & Concept",
       description: "Upload mood boards, style frames, and inspiration",
-      icon: Palette,
-      details: ["Mood boards", "Style frames", "Color palettes", "Sample poses"]
+      icon: Palette
     },
     {
       id: 2,
       title: "Model Selection",
       description: "Choose AI models or upload custom model photos",
-      icon: Users,
-      details: ["AI model library", "Custom uploads", "Multiple selections", "Preferences"]
+      icon: Users
     },
     {
       id: 3,
       title: "Product Upload",
       description: "Upload product images with white backgrounds",
-      icon: Upload,
-      details: ["Drag & drop", "Background validation", "Quality check", "Batch support"]
+      icon: Upload
     },
     {
       id: 4,
       title: "AI Generation",
       description: "Generate professional photoshoot images",
-      icon: Sparkles,
-      details: ["Process inputs", "Multiple variations", "Apply styling", "Create scenes"]
+      icon: Sparkles
     },
     {
       id: 5,
       title: "Select & Edit",
       description: "Choose favorites and refine with prompts",
-      icon: Edit3,
-      details: ["Browse results", "Select favorites", "Text prompts", "Real-time edits"]
+      icon: Edit3
     },
     {
       id: 6,
       title: "Save & Share",
       description: "Name project and collaborate with team",
-      icon: Save,
-      details: ["Name projects", "Save progress", "Invite team", "Version control"]
+      icon: Save
     }
   ];
 
@@ -78,17 +72,6 @@ const ProjectsWorkflow = () => {
           <div className="inline-flex items-center gap-2 bg-muted/50 border border-border rounded-lg px-4 py-2 text-sm text-muted-foreground mb-6">
             <Lock className="h-4 w-4" />
             <span>Login required to access Projects workflow</span>
-          </div>
-
-          {/* Team Collaboration */}
-          <div className="bg-card/30 rounded-lg p-4 max-w-lg mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-2">
-              <UserPlus className="h-5 w-5 text-primary" />
-              <h4 className="text-base font-semibold text-foreground">Team Collaboration</h4>
-            </div>
-            <p className="text-sm text-muted-foreground text-center">
-              Invite team members, share feedback, and work together on creating the perfect photoshoot images.
-            </p>
           </div>
         </div>
 
@@ -113,39 +96,10 @@ const ProjectsWorkflow = () => {
                 </CardHeader>
                 
                 <CardContent className="pt-0">
-                  <ul className="space-y-1">
-                    {step.details.map((detail, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <div className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Simplified card content without details */}
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="bg-card rounded-2xl p-4 shadow-card max-w-2xl mx-auto">
-          <div className="text-center mb-4">
-            <h3 className="text-xl font-bold text-foreground mb-2">
-              Ready to Start Your Project?
-            </h3>
-            <p className="text-muted-foreground mb-3">
-              Login to access the full Projects workflow and collaborate with your team
-            </p>
-            <div className="mb-4">
-              <Button variant="outline" size="sm" className="border-primary/30 text-primary hover:bg-primary/10">
-                Learn More
-              </Button>
-            </div>
-            <div className="flex justify-center">
-              <Button size="lg" className="bg-gradient-primary hover:opacity-90">
-                Login to Get Started
-              </Button>
-            </div>
           </div>
         </div>
       </div>
