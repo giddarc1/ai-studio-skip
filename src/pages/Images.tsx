@@ -479,21 +479,42 @@ const Images = () => {
         {/* Image Generation Options */}
         <section className="py-24">
           <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
                 6 Ways to Generate Images
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Choose the perfect tool for your image generation needs. Each option is designed for specific use cases.
+              <p className="text-xl text-muted-foreground max-w-xl mx-auto">
+                Choose the perfect tool for your image generation needs
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-              {imageOptions.map((option) => (
-                <div key={option.id}>
-                  {renderImageOptionDemo(option)}
-                </div>
-              ))}
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {imageOptions.map((option, index) => (
+                  <div key={index} className="bg-card rounded-xl p-6 shadow-card hover:shadow-lg transition-shadow duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full bg-gradient-accent flex items-center justify-center">
+                          <option.icon className="h-5 w-5 text-accent" />
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className="text-lg font-bold text-foreground">{option.title}</h3>
+                          <Badge variant="secondary" className="text-xs">{option.badge}</Badge>
+                        </div>
+                        <p className="text-muted-foreground text-sm">{option.description}</p>
+                        {!isLoggedIn && (
+                          <div className="mt-3 flex items-center gap-1 text-xs text-muted-foreground">
+                            <LogIn className="h-3 w-3" />
+                            <span>Sign in to access</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
