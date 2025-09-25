@@ -339,33 +339,38 @@ const Images = () => {
       <Header />
       <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="pt-20 pb-8 bg-gradient-subtle">
+        <section className="pt-24 pb-12 bg-gradient-subtle">
           <div className="container mx-auto px-6">
             <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-4">
+              <h1 className="text-5xl md:text-6xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-6">
                 Images
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-6">
-                AI image generation with 6 specialized tools - from backgrounds to campaign photography
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+                Quick and powerful AI image generation for individual creators
+              </p>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-12">
+                Transform your product photos with 6 specialized AI tools. From simple background changes 
+                to complex campaign photography - create professional images in minutes.
               </p>
               
               {!isLoggedIn ? (
-                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <Button 
-                    className="bg-gradient-premium hover:opacity-90 text-white px-6 py-2"
+                    size="lg" 
+                    className="bg-gradient-premium hover:opacity-90 text-white px-8 py-4 text-lg"
                     onClick={() => setIsLoggedIn(true)}
                   >
-                    <LogIn className="w-4 h-4 mr-2" />
+                    <LogIn className="w-5 h-5 mr-2" />
                     Sign In to Generate
                   </Button>
                   <p className="text-sm text-muted-foreground">
-                    Access all generation tools
+                    Sign in to access all image generation tools
                   </p>
                 </div>
               ) : (
                 <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
                   <User className="w-4 h-4 mr-2" />
-                  All Tools Available
+                  Signed In - All Tools Available
                 </Badge>
               )}
             </div>
@@ -373,95 +378,101 @@ const Images = () => {
         </section>
 
         {/* Image Generation Options */}
-        <section className="py-12">
+        <section className="py-24">
           <div className="container mx-auto px-6">
-            <Tabs defaultValue="plain-background" className="max-w-7xl mx-auto">
-              <div className="text-center mb-8">
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-                  Choose Your Generation Tool
-                </h2>
-              </div>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                6 Ways to Generate Images
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Choose the perfect tool for your image generation needs. Each option is designed for specific use cases.
+              </p>
+            </div>
 
-              <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-8 h-auto">
-                {imageOptions.map((option) => (
-                  <TabsTrigger 
-                    key={option.id} 
-                    value={option.id}
-                    className="flex flex-col items-center gap-1 p-3 text-xs"
-                  >
-                    <option.icon className="h-4 w-4" />
-                    <span className="hidden sm:block">{option.title.split(' ')[0]}</span>
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-
+            <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
               {imageOptions.map((option) => (
-                <TabsContent key={option.id} value={option.id}>
-                  <div className="max-w-2xl mx-auto">
-                    {renderImageOptionDemo(option)}
-                  </div>
-                </TabsContent>
+                <div key={option.id}>
+                  {renderImageOptionDemo(option)}
+                </div>
               ))}
-            </Tabs>
-          </div>
-        </section>
-
-        {/* Compact Benefits */}
-        <section className="py-12 bg-secondary/30">
-          <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
-              Why Choose Images?
-            </h2>
-
-            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-3">
-                  <Wand2 className="h-5 w-5 text-accent" />
-                </div>
-                <h3 className="font-semibold mb-2">Instant Results</h3>
-                <p className="text-sm text-muted-foreground">
-                  Generate professional images in minutes for quick social media and e-commerce needs.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-3">
-                  <User className="h-5 w-5 text-accent" />
-                </div>
-                <h3 className="font-semibold mb-2">Solo Friendly</h3>
-                <p className="text-sm text-muted-foreground">
-                  Intuitive tools designed for individual creators and small businesses.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-3">
-                  <Image className="h-5 w-5 text-accent" />
-                </div>
-                <h3 className="font-semibold mb-2">6 Specialized Tools</h3>
-                <p className="text-sm text-muted-foreground">
-                  From simple backgrounds to complex campaign photography options.
-                </p>
-              </div>
             </div>
           </div>
         </section>
 
-        {/* Compact CTA Section */}
+        {/* Features Comparison */}
+        <section className="py-24 bg-secondary/30">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Why Choose Images?
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Perfect for solo creators, small businesses, and quick turnaround projects
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <Card>
+                <CardHeader>
+                  <div className="w-16 h-16 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-4">
+                    <Wand2 className="h-7 w-7 text-accent" />
+                  </div>
+                  <CardTitle className="text-xl text-center">Instant Results</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-base text-center">
+                    Generate professional images in minutes, not hours. Perfect for quick projects and immediate needs.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="w-16 h-16 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-4">
+                    <User className="h-7 w-7 text-accent" />
+                  </div>
+                  <CardTitle className="text-xl text-center">Solo Friendly</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-base text-center">
+                    No team coordination needed. Simple workflows designed for individual creators and small businesses.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="w-16 h-16 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-4">
+                    <Image className="h-7 w-7 text-accent" />
+                  </div>
+                  <CardTitle className="text-xl text-center">Versatile Options</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-base text-center">
+                    6 specialized tools covering everything from basic backgrounds to complex campaign photography.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
         {!isLoggedIn && (
-          <section className="py-16 bg-gradient-subtle">
+          <section className="py-24 bg-gradient-subtle">
             <div className="container mx-auto px-6 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
                 Ready to Create Amazing Images?
               </h2>
-              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
                 Sign in to access all 6 image generation tools and start creating professional product photography.
               </p>
               <Button 
-                className="bg-gradient-premium hover:opacity-90 text-white px-6 py-3"
+                size="lg" 
+                className="bg-gradient-premium hover:opacity-90 text-white px-8 py-4 text-lg"
                 onClick={() => setIsLoggedIn(true)}
               >
-                <LogIn className="w-4 h-4 mr-2" />
+                <LogIn className="w-5 h-5 mr-2" />
                 Sign In Now
               </Button>
             </div>
