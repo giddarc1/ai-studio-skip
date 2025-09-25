@@ -1,6 +1,7 @@
 import { Users, FileText, Upload, UserPlus, Wand2, Eye, Download, CheckCircle, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import Header from "@/components/Header";
 
 const Projects = () => {
   const projectWorkflow = [
@@ -65,8 +66,10 @@ const Projects = () => {
       <title>Projects - Team Collaboration for Product Photography | AI Studio</title>
       <meta name="description" content="Collaborate with your team to create stunning product photography campaigns. Streamlined workflow from brief to delivery with AI-powered generation." />
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-gradient-subtle">
+      <Header />
+      <main className="min-h-screen">
+        {/* Hero Section */}
+        <section className="pt-24 pb-12 bg-gradient-subtle">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-6">
@@ -175,7 +178,8 @@ const Projects = () => {
             </Button>
           </div>
         </div>
-      </section>
+        </section>
+      </main>
     </div>
   );
 };

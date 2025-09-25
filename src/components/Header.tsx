@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Camera, User } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -17,38 +18,44 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-gradient-premium rounded-lg flex items-center justify-center">
               <Camera className="w-5 h-5 text-premium-foreground" />
             </div>
             <span className="text-xl font-bold text-foreground">JewelStudio</span>
-          </div>
+          </Link>
 
           {/* Navigation Menu */}
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuLink 
-                  className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
-                  href="/"
-                >
-                  Home
+                <NavigationMenuLink asChild>
+                  <Link 
+                    to="/"
+                    className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
+                  >
+                    Home
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink 
-                  className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
-                  href="/projects"
-                >
-                  Projects
+                <NavigationMenuLink asChild>
+                  <Link 
+                    to="/projects"
+                    className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
+                  >
+                    Projects
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink 
-                  className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
-                  href="/images"
-                >
-                  Images
+                <NavigationMenuLink asChild>
+                  <Link 
+                    to="/images"
+                    className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
+                  >
+                    Images
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
