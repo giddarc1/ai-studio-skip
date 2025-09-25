@@ -20,12 +20,12 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-600 via-blue-600 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+              <div className="w-10 h-10 bg-gradient-premium rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                 <Sparkles className="w-6 h-6 text-white" />
               </div>
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full animate-pulse"></div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-premium rounded-full animate-pulse"></div>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-premium bg-clip-text text-transparent">
               Lens AI Studio
             </span>
           </Link>
