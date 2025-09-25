@@ -20,6 +20,9 @@ import apparelBefore from "@/assets/apparel-before.jpg";
 import apparelAfter from "@/assets/apparel-after.jpg";
 import electronicsBefore from "@/assets/electronics-before.jpg";
 import electronicsAfter from "@/assets/electronics-after.jpg";
+import instantResultsDemo from "@/assets/instant-results-demo.jpg";
+import soloFriendlyDemo from "@/assets/solo-friendly-demo.jpg";
+import versatileOptionsDemo from "@/assets/versatile-options-demo.jpg";
 
 const Images = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -78,6 +81,27 @@ const Images = () => {
       inputs: ["Base image (optional)", "Text prompts", "Style preferences", "Edit instructions"],
       badge: "Flexible",
       demoImage: electronicsAfter
+    }
+  ];
+
+  const imageFeatures = [
+    {
+      title: "Instant Results",
+      description: "Generate professional images in minutes, not hours. Perfect for quick projects and immediate needs.",
+      icon: Wand2,
+      image: instantResultsDemo
+    },
+    {
+      title: "Solo Friendly",
+      description: "No team coordination needed. Simple workflows designed for individual creators and small businesses.",
+      icon: User,
+      image: soloFriendlyDemo
+    },
+    {
+      title: "Versatile Options",
+      description: "6 specialized tools covering everything from basic backgrounds to complex campaign photography.",
+      icon: Image,
+      image: versatileOptionsDemo
     }
   ];
 
@@ -532,47 +556,28 @@ const Images = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <Card>
-                <CardHeader>
-                  <div className="w-16 h-16 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-4">
-                    <Wand2 className="h-7 w-7 text-accent" />
+              {imageFeatures.map((feature, index) => (
+                <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                  <div className="aspect-video overflow-hidden">
+                    <img 
+                      src={feature.image} 
+                      alt={`${feature.title} demo interface`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <CardTitle className="text-xl text-center">Instant Results</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base text-center">
-                    Generate professional images in minutes, not hours. Perfect for quick projects and immediate needs.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <div className="w-16 h-16 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-4">
-                    <User className="h-7 w-7 text-accent" />
-                  </div>
-                  <CardTitle className="text-xl text-center">Solo Friendly</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base text-center">
-                    No team coordination needed. Simple workflows designed for individual creators and small businesses.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <div className="w-16 h-16 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-4">
-                    <Image className="h-7 w-7 text-accent" />
-                  </div>
-                  <CardTitle className="text-xl text-center">Versatile Options</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base text-center">
-                    6 specialized tools covering everything from basic backgrounds to complex campaign photography.
-                  </CardDescription>
-                </CardContent>
-              </Card>
+                  <CardHeader className="pb-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-3">
+                      <feature.icon className="h-5 w-5 text-accent" />
+                    </div>
+                    <CardTitle className="text-lg">{feature.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-sm">
+                      {feature.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
