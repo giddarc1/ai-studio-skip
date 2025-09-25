@@ -11,6 +11,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import logoImage from "@/assets/lens-ai-studio-logo.png";
 
 const Header = () => {
   return (
@@ -18,16 +19,12 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <div className="w-10 h-10 bg-gradient-premium rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-premium rounded-full animate-pulse"></div>
-            </div>
-            <span className="text-2xl font-bold bg-gradient-premium bg-clip-text text-transparent">
-              Lens AI Studio
-            </span>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src={logoImage} 
+              alt="Lens AI Studio - AI Product Photography Studio" 
+              className="h-12 w-auto transition-all duration-300 group-hover:scale-105"
+            />
           </Link>
 
           {/* Navigation Menu */}
