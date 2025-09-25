@@ -2,6 +2,10 @@ import { Users, FileText, Upload, UserPlus, Wand2, Eye, Download, CheckCircle, S
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Header from "@/components/Header";
+import projectsHero from "@/assets/projects-hero.jpg";
+import teamCollaborationDemo from "@/assets/team-collaboration-demo.jpg";
+import batchProcessingDemo from "@/assets/batch-processing-demo.jpg";
+import qualityControlDemo from "@/assets/quality-control-demo.jpg";
 
 const Projects = () => {
   const projectWorkflow = [
@@ -46,17 +50,20 @@ const Projects = () => {
     {
       title: "Team Collaboration",
       description: "Work together seamlessly with role-based permissions and real-time collaboration tools.",
-      icon: Users
+      icon: Users,
+      image: teamCollaborationDemo
     },
     {
       title: "Batch Processing",
       description: "Process multiple products at once with consistent styling and automated workflows.",
-      icon: Settings
+      icon: Settings,
+      image: batchProcessingDemo
     },
     {
       title: "Quality Control",
       description: "Built-in approval workflows ensure every image meets your brand standards.",
-      icon: CheckCircle
+      icon: CheckCircle,
+      image: qualityControlDemo
     }
   ];
 
@@ -69,24 +76,31 @@ const Projects = () => {
       <Header />
       <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="pt-24 pb-12 bg-gradient-subtle">
-        <div className="container mx-auto px-6">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-6">
-              Projects
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-              Team collaboration for large-scale product photography
-            </p>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12">
-              Streamlined workflow from brief to delivery with team collaboration and brand consistency.
-            </p>
-            <Button size="lg" className="bg-gradient-premium hover:opacity-90 text-white px-8 py-4 text-lg">
-              Start a Project
-            </Button>
+        <section className="pt-24 pb-12 bg-gradient-subtle relative overflow-hidden">
+          <div className="absolute inset-0 opacity-20">
+            <img 
+              src={projectsHero} 
+              alt="Team collaboration in professional photography studio" 
+              className="w-full h-full object-cover"
+            />
           </div>
-        </div>
-      </section>
+          <div className="relative z-10 container mx-auto px-6">
+            <div className="text-center max-w-4xl mx-auto">
+              <h1 className="text-5xl md:text-6xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-6">
+                Projects
+              </h1>
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+                Team collaboration for large-scale product photography
+              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12">
+                Streamlined workflow from brief to delivery with team collaboration and brand consistency.
+              </p>
+              <Button size="lg" className="bg-gradient-premium hover:opacity-90 text-white px-8 py-4 text-lg">
+                Start a Project
+              </Button>
+            </div>
+          </div>
+        </section>
 
       {/* Workflow Section */}
       <section className="py-24 bg-secondary/30">
@@ -131,9 +145,16 @@ const Projects = () => {
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {projectFeatures.map((feature, index) => (
-                <Card key={index} className="text-center">
+                <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                  <div className="aspect-video overflow-hidden">
+                    <img 
+                      src={feature.image} 
+                      alt={`${feature.title} demo interface`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <CardHeader className="pb-4">
                     <div className="w-12 h-12 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-3">
                       <feature.icon className="h-5 w-5 text-accent" />
