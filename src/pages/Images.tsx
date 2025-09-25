@@ -9,6 +9,18 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Header from "@/components/Header";
 
+// Import images
+import heroImage from "@/assets/images-hero.jpg";
+import aiModelDemo from "@/assets/ai-model-demo.jpg";
+import plainBackgroundDemo from "@/assets/plain-background-demo.jpg";
+import campaignDemo from "@/assets/campaign-demo.jpg";
+import jewelryBefore from "@/assets/jewelry-before.jpg";
+import jewelryAfter from "@/assets/jewelry-after.jpg";
+import apparelBefore from "@/assets/apparel-before.jpg";
+import apparelAfter from "@/assets/apparel-after.jpg";
+import electronicsBefore from "@/assets/electronics-before.jpg";
+import electronicsAfter from "@/assets/electronics-after.jpg";
+
 const Images = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -19,7 +31,8 @@ const Images = () => {
       title: "Plain Background Images",
       description: "Generate clean product shots with customizable backgrounds and lighting",
       inputs: ["Clear product image", "Background color (default: white)", "Lighting style", "Number of angles"],
-      badge: "Quick Setup"
+      badge: "Quick Setup",
+      demoImage: plainBackgroundDemo
     },
     {
       id: "background-replacement",
@@ -27,7 +40,8 @@ const Images = () => {
       title: "Background Replacement",
       description: "Replace backgrounds with AI-powered environment transformation",
       inputs: ["Product image", "Reference background image", "Product placement", "Theme selection"],
-      badge: "Popular"
+      badge: "Popular",
+      demoImage: jewelryAfter
     },
     {
       id: "ai-model",
@@ -35,7 +49,8 @@ const Images = () => {
       title: "AI Model Integration",
       description: "Generate images with AI models wearing or using your products",
       inputs: ["Product image", "Product type", "Product dimensions", "Style/Pose selection"],
-      badge: "AI Powered"
+      badge: "AI Powered",
+      demoImage: aiModelDemo
     },
     {
       id: "real-model",
@@ -43,7 +58,8 @@ const Images = () => {
       title: "Real Model Integration", 
       description: "Create lifestyle shots with realistic model imagery",
       inputs: ["Product image", "Product type", "Product dimensions", "Model style/pose"],
-      badge: "Realistic"
+      badge: "Realistic",
+      demoImage: apparelAfter
     },
     {
       id: "campaign-shots",
@@ -51,7 +67,8 @@ const Images = () => {
       title: "Campaign Photography",
       description: "Create marketing-ready campaign images for special occasions",
       inputs: ["Product images", "Campaign reference image", "Model type (AI/Real)", "Product measurements", "Campaign style"],
-      badge: "Premium"
+      badge: "Premium",
+      demoImage: campaignDemo
     },
     {
       id: "prompt-editing",
@@ -59,7 +76,8 @@ const Images = () => {
       title: "Prompt-Based Generation",
       description: "Generate and edit images using natural language prompts",
       inputs: ["Base image (optional)", "Text prompts", "Style preferences", "Edit instructions"],
-      badge: "Flexible"
+      badge: "Flexible",
+      demoImage: electronicsAfter
     }
   ];
 
@@ -69,7 +87,20 @@ const Images = () => {
   const renderImageOptionDemo = (option: typeof imageOptions[0]) => {
     if (!isLoggedIn) {
       return (
-        <Card className="opacity-75">
+        <Card className="opacity-75 overflow-hidden">
+          <div className="relative h-48 overflow-hidden">
+            <img 
+              src={option.demoImage} 
+              alt={`${option.title} demo`} 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <div className="text-center text-white">
+                <LogIn className="h-8 w-8 mx-auto mb-2" />
+                <p className="text-sm">Sign in to access this feature</p>
+              </div>
+            </div>
+          </div>
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -85,7 +116,7 @@ const Images = () => {
             <CardDescription className="text-base mt-2">{option.description}</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3 mb-6">
+            <div className="space-y-3">
               <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Required Inputs:</h4>
               <ul className="space-y-2">
                 {option.inputs.map((input, index) => (
@@ -96,32 +127,33 @@ const Images = () => {
                 ))}
               </ul>
             </div>
-            <div className="flex items-center justify-center p-8 border-2 border-dashed border-muted rounded-lg bg-muted/30">
-              <div className="text-center">
-                <LogIn className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                <p className="text-sm text-muted-foreground">Sign in to access this feature</p>
-              </div>
-            </div>
           </CardContent>
         </Card>
       );
     }
 
     return (
-      <Card>
+      <Card className="overflow-hidden">
+        <div className="relative h-48 overflow-hidden">
+          <img 
+            src={option.demoImage} 
+            alt={`${option.title} demo`} 
+            className="w-full h-full object-cover hover-scale transition-transform duration-300"
+          />
+          <div className="absolute top-4 right-4">
+            <Badge variant="secondary" className="bg-white/90 text-gray-800">{option.badge}</Badge>
+          </div>
+        </div>
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-accent flex items-center justify-center">
-                <option.icon className="h-5 w-5 text-accent" />
-              </div>
-              <div>
-                <CardTitle className="text-lg">{option.title}</CardTitle>
-                <Badge variant="secondary" className="mt-1">{option.badge}</Badge>
-              </div>
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full bg-gradient-accent flex items-center justify-center">
+              <option.icon className="h-5 w-5 text-accent" />
+            </div>
+            <div>
+              <CardTitle className="text-lg">{option.title}</CardTitle>
+              <CardDescription className="text-base mt-1">{option.description}</CardDescription>
             </div>
           </div>
-          <CardDescription className="text-base mt-2">{option.description}</CardDescription>
         </CardHeader>
         <CardContent>
           {/* Render specific form based on option type */}
@@ -332,47 +364,114 @@ const Images = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* SEO meta tags */}
       <title>Images - AI-Powered Product Photography Generation | Studio</title>
       <meta name="description" content="Generate stunning product images with AI. Choose from 6 powerful options: plain backgrounds, model integration, campaign shots, and prompt-based editing." />
       
       <Header />
       <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="pt-24 pb-12 bg-gradient-subtle">
+        <section className="pt-24 pb-12 bg-gradient-subtle relative overflow-hidden">
           <div className="container mx-auto px-6">
-            <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-5xl md:text-6xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-6">
-                Images
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-                Quick and powerful AI image generation for individual creators
+            <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+              <div className="text-center lg:text-left">
+                <h1 className="text-5xl md:text-6xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-6">
+                  Images
+                </h1>
+                <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+                  Quick and powerful AI image generation for individual creators
+                </p>
+                <p className="text-lg text-muted-foreground mb-12">
+                  Transform your product photos with 6 specialized AI tools. From simple background changes 
+                  to complex campaign photography - create professional images in minutes.
+                </p>
+                
+                {!isLoggedIn ? (
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                    <Button 
+                      size="lg" 
+                      className="bg-gradient-premium hover:opacity-90 text-white px-8 py-4 text-lg"
+                      onClick={() => setIsLoggedIn(true)}
+                    >
+                      <LogIn className="w-5 h-5 mr-2" />
+                      Sign In to Generate
+                    </Button>
+                    <p className="text-sm text-muted-foreground">
+                      Sign in to access all image generation tools
+                    </p>
+                  </div>
+                ) : (
+                  <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                    <User className="w-4 h-4 mr-2" />
+                    Signed In - All Tools Available
+                  </Badge>
+                )}
+              </div>
+              <div className="relative">
+                <img 
+                  src={heroImage} 
+                  alt="AI-powered product photography transformation showcase" 
+                  className="rounded-2xl shadow-2xl w-full hover-scale"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Before/After Gallery */}
+        <section className="py-24 bg-secondary/30">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                See the Transformation
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Real examples of how our AI transforms ordinary product photos into professional images
               </p>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-12">
-                Transform your product photos with 6 specialized AI tools. From simple background changes 
-                to complex campaign photography - create professional images in minutes.
-              </p>
-              
-              {!isLoggedIn ? (
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <Button 
-                    size="lg" 
-                    className="bg-gradient-premium hover:opacity-90 text-white px-8 py-4 text-lg"
-                    onClick={() => setIsLoggedIn(true)}
-                  >
-                    <LogIn className="w-5 h-5 mr-2" />
-                    Sign In to Generate
-                  </Button>
-                  <p className="text-sm text-muted-foreground">
-                    Sign in to access all image generation tools
-                  </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <div className="group">
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  <div className="relative overflow-hidden rounded-lg">
+                    <img src={jewelryBefore} alt="Jewelry before AI enhancement" className="w-full h-32 object-cover" />
+                    <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
+                  </div>
+                  <div className="relative overflow-hidden rounded-lg">
+                    <img src={jewelryAfter} alt="Jewelry after AI enhancement" className="w-full h-32 object-cover" />
+                    <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
+                  </div>
                 </div>
-              ) : (
-                <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                  <User className="w-4 h-4 mr-2" />
-                  Signed In - All Tools Available
-                </Badge>
-              )}
+                <h3 className="font-semibold text-center">Jewelry Enhancement</h3>
+              </div>
+
+              <div className="group">
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  <div className="relative overflow-hidden rounded-lg">
+                    <img src={apparelBefore} alt="Apparel before AI enhancement" className="w-full h-32 object-cover" />
+                    <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
+                  </div>
+                  <div className="relative overflow-hidden rounded-lg">
+                    <img src={apparelAfter} alt="Apparel after AI enhancement" className="w-full h-32 object-cover" />
+                    <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
+                  </div>
+                </div>
+                <h3 className="font-semibold text-center">Fashion Photography</h3>
+              </div>
+
+              <div className="group">
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  <div className="relative overflow-hidden rounded-lg">
+                    <img src={electronicsBefore} alt="Electronics before AI enhancement" className="w-full h-32 object-cover" />
+                    <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
+                  </div>
+                  <div className="relative overflow-hidden rounded-lg">
+                    <img src={electronicsAfter} alt="Electronics after AI enhancement" className="w-full h-32 object-cover" />
+                    <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
+                  </div>
+                </div>
+                <h3 className="font-semibold text-center">Tech Products</h3>
+              </div>
             </div>
           </div>
         </section>
