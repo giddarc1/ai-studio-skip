@@ -26,7 +26,7 @@ const Header = () => {
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full animate-pulse"></div>
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
-              VisualForge AI
+              Lens AI Studio
             </span>
           </Link>
 
