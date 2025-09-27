@@ -12,12 +12,11 @@ import {
 } from "@/components/ui/select";
 import Header from "@/components/Header";
 import ProjectCard from "@/components/ProjectCard";
-import { CreateProjectWizard } from "@/components/CreateProjectWizard";
 import { ProjectsLayout } from "@/components/ProjectsLayout";
 import { ProjectsDashboard } from "@/components/ProjectsDashboard";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
 import projectsHero from "@/assets/projects-hero.jpg";
 import teamCollaborationDemo from "@/assets/team-collaboration-demo.jpg";
 import batchProcessingDemo from "@/assets/batch-processing-demo.jpg";
@@ -70,8 +69,6 @@ const Projects = () => {
     }
   ]);
   
-  const [createProjectOpen, setCreateProjectOpen] = useState(false);
-
   const handleCreateProject = async (projectData: any) => {
     // In real app, this would create project via Supabase
     console.log('Creating project:', projectData);
@@ -123,7 +120,7 @@ const Projects = () => {
 
   if (loading) {
     return (
-      <ProjectsLayout projects={projects} onCreateProject={() => setCreateProjectOpen(true)}>
+      <ProjectsLayout projects={projects}>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
@@ -141,22 +138,15 @@ const Projects = () => {
         <title>My Projects - Lens AI Studio</title>
         <meta name="description" content="Manage your AI-powered product photography projects. Create, edit, and track your professional product images." />
         
-        <ProjectsLayout projects={projects} onCreateProject={() => setCreateProjectOpen(true)}>
+        <ProjectsLayout projects={projects}>
           <ProjectsDashboard
             projects={projects}
-            onCreateProject={() => setCreateProjectOpen(true)}
             onEditProject={handleEditProject}
             onDeleteProject={handleDeleteProject}
             onViewProject={handleViewProject}
             onDownloadProject={handleDownloadProject}
           />
         </ProjectsLayout>
-
-        <CreateProjectWizard
-          open={createProjectOpen}
-          onOpenChange={setCreateProjectOpen}
-          onCreateProject={handleCreateProject}
-        />
       </>
     );
   }
@@ -252,7 +242,7 @@ const Projects = () => {
               <Button 
                 size="lg" 
                 className="bg-gradient-premium hover:opacity-90 text-white px-8 py-4 text-lg"
-                onClick={() => window.location.href = '/sign-in'}
+                onClick={() => window.location.href = '/projects/new'}
               >
                 Start a Project
               </Button>
@@ -339,14 +329,14 @@ const Projects = () => {
             <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
               Join brands using our platform to create professional product photography.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-gradient-premium hover:opacity-90 text-white px-6 py-3"
-                onClick={() => window.location.href = '/sign-in'}
-              >
-                Create Project
-              </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="bg-gradient-premium hover:opacity-90 text-white px-6 py-3"
+              onClick={() => window.location.href = '/projects/new'}
+            >
+              Create Project
+            </Button>
               <Button size="lg" variant="outline" className="px-6 py-3">
                 View Pricing
               </Button>

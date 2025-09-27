@@ -28,10 +28,9 @@ import {
 
 interface ProjectsSidebarProps {
   projects: any[];
-  onCreateProject: () => void;
 }
 
-export function ProjectsSidebar({ projects, onCreateProject }: ProjectsSidebarProps) {
+export function ProjectsSidebar({ projects }: ProjectsSidebarProps) {
   const { open } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
@@ -104,7 +103,7 @@ export function ProjectsSidebar({ projects, onCreateProject }: ProjectsSidebarPr
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton onClick={onCreateProject} className="w-full bg-gradient-to-r from-primary via-primary-glow to-accent text-white hover:opacity-90">
+                <SidebarMenuButton onClick={() => window.location.href = '/projects/new'} className="w-full bg-gradient-to-r from-primary via-primary-glow to-accent text-white hover:opacity-90">
                   <Plus className="mr-2 h-4 w-4" />
                   {open && <span>New Project</span>}
                 </SidebarMenuButton>

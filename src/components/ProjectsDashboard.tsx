@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -46,13 +46,13 @@ interface ProjectsDashboardProps {
 
 export const ProjectsDashboard = ({
   projects,
-  onCreateProject,
   onEditProject,
   onDeleteProject,
   onViewProject,
   onDownloadProject
-}: ProjectsDashboardProps) => {
+}: Omit<ProjectsDashboardProps, 'onCreateProject'>) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -101,7 +101,7 @@ export const ProjectsDashboard = ({
           </p>
         </div>
         <Button 
-          onClick={onCreateProject}
+          onClick={() => navigate('/projects/new')}
           className="bg-gradient-to-r from-primary via-primary-glow to-accent hover:shadow-glow transition-all duration-300"
         >
           <Plus className="mr-2 h-4 w-4" />
@@ -223,7 +223,7 @@ export const ProjectsDashboard = ({
             }
           </p>
           <Button 
-            onClick={onCreateProject}
+            onClick={() => navigate('/projects/new')}
             className="bg-gradient-to-r from-primary via-primary-glow to-accent"
           >
             <Plus className="mr-2 h-4 w-4" />

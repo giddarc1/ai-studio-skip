@@ -75,7 +75,7 @@ const ProjectDetail = () => {
 
   if (loading) {
     return (
-      <ProjectsLayout projects={projects} onCreateProject={() => {}}>
+      <ProjectsLayout projects={projects}>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
@@ -88,7 +88,7 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <ProjectsLayout projects={projects} onCreateProject={() => {}}>
+      <ProjectsLayout projects={projects}>
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-foreground mb-2">Project Not Found</h2>
@@ -156,7 +156,7 @@ const ProjectDetail = () => {
       <title>{project.name} - Project Details | Lens AI Studio</title>
       <meta name="description" content={`View details and manage your ${project.name} project. Track progress, download results, and collaborate with your team.`} />
 
-      <ProjectsLayout projects={projects} onCreateProject={() => {}}>
+      <ProjectsLayout projects={projects}>
         <div className="h-full overflow-auto">
           {/* Header */}
           <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-10">
