@@ -8,6 +8,7 @@ import Projects from "./pages/Projects";
 import CreateProject from "./pages/CreateProject";
 import ProjectDetail from "./pages/ProjectDetail";
 import Images from "./pages/Images";
+import Pricing from "./pages/Pricing";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/projects/new" element={<CreateProject />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
           <Route path="/images" element={<Images />} />
+          <Route path="/pricing" element={<Pricing />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -104,6 +104,16 @@ const Header = () => {
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link 
+                    to="/pricing"
+                    className={cn(navigationMenuTriggerStyle(), "text-foreground hover:text-premium")}
+                  >
+                    Pricing
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 
