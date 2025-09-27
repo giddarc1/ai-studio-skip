@@ -199,85 +199,71 @@ export function ImagesDashboard({ selectedTool, onToolSelect, activeView }: Imag
 
   // Dashboard view
   return (
-    <div className="p-6 space-y-8">
+    <div className="p-8">
       {/* Welcome Section */}
-      <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-4">
-          AI Image Studio
+      <div className="mb-12">
+        <h1 className="text-2xl font-semibold text-foreground mb-2">
+          Welcome back, {user?.user_metadata?.full_name || user?.email?.split('@')[0]}
         </h1>
-        <h2 className="text-xl font-bold text-foreground mb-2">
-          Welcome back, {user?.user_metadata?.full_name || user?.email?.split('@')[0]}!
-        </h2>
         <p className="text-muted-foreground">
           Create stunning product photography with AI
         </p>
       </div>
 
-      {/* Stats Overview */}
-      <GenerationStats />
+      {/* Quick Stats */}
+      <div className="mb-12">
+        <GenerationStats />
+      </div>
 
-      {/* Quick Access - Popular Tools */}
-      <div className="space-y-6">
-        <div className="flex items-center gap-3">
-          <div className="w-1 h-8 bg-gradient-premium rounded-full"></div>
-          <h3 className="text-xl font-semibold text-foreground">Quick Start</h3>
-        </div>
-        <div className="grid md:grid-cols-2 gap-4">
+      {/* Popular Tools */}
+      <div className="mb-12">
+        <h2 className="text-lg font-medium text-foreground mb-6">Popular Tools</h2>
+        <div className="grid md:grid-cols-2 gap-6">
           {popularTools.map((tool) => (
             <Card 
               key={tool.id} 
-              className="cursor-pointer hover:shadow-lg transition-all duration-200 group"
+              className="cursor-pointer hover:shadow-md transition-shadow duration-200 border-border/50"
               onClick={() => onToolSelect(tool.id)}
             >
               <CardHeader className="pb-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-accent flex items-center justify-center">
-                      <tool.icon className="h-5 w-5 text-accent" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-lg">{tool.title}</CardTitle>
-                      <Badge variant="secondary" className="text-xs mt-1">{tool.badge}</Badge>
-                    </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
+                    <tool.icon className="h-6 w-6 text-foreground" />
                   </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  <div className="flex-1">
+                    <CardTitle className="text-base font-medium">{tool.title}</CardTitle>
+                    <CardDescription className="text-sm mt-1">
+                      {tool.description}
+                    </CardDescription>
+                  </div>
                 </div>
               </CardHeader>
-              <CardContent>
-                <CardDescription>{tool.description}</CardDescription>
-              </CardContent>
             </Card>
           ))}
         </div>
       </div>
 
-      {/* All Tools Grid */}
-      <div className="space-y-6">
-        <div className="flex items-center gap-3">
-          <div className="w-1 h-8 bg-gradient-accent rounded-full"></div>
-          <h3 className="text-xl font-semibold text-foreground">All Tools</h3>
-        </div>
+      {/* All Tools */}
+      <div>
+        <h2 className="text-lg font-medium text-foreground mb-6">All Tools</h2>
         <div className="grid md:grid-cols-3 gap-4">
           {imageOptions.map((tool) => (
             <Card 
               key={tool.id} 
-              className="cursor-pointer hover:shadow-md transition-all duration-200 group"
+              className="cursor-pointer hover:shadow-sm transition-shadow duration-200 border-border/50"
               onClick={() => onToolSelect(tool.id)}
             >
               <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-subtle flex items-center justify-center">
-                    <tool.icon className="h-4 w-4" />
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
+                    <tool.icon className="h-4 w-4 text-foreground" />
                   </div>
-                  <Badge variant="outline" className="text-xs">{tool.badge}</Badge>
+                  <CardTitle className="text-sm font-medium">{tool.title}</CardTitle>
                 </div>
-                <CardTitle className="text-base">{tool.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-sm line-clamp-2">
+                <CardDescription className="text-xs mt-2 line-clamp-2">
                   {tool.description}
                 </CardDescription>
-              </CardContent>
+              </CardHeader>
             </Card>
           ))}
         </div>
