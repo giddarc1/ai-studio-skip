@@ -55,10 +55,10 @@ const SignUp = () => {
       });
 
       if (error) {
-        if (error.message === 'Supabase not configured') {
+        if (error.message.includes('configure Supabase environment variables')) {
           toast({
-            title: "Sign up not available",
-            description: "Supabase needs to be properly configured to create accounts. Please set up your Supabase project first.",
+            title: "Supabase Configuration Required",
+            description: "Your Supabase project is connected but environment variables need to be configured. Check the browser console for details.",
             variant: "destructive",
           });
           return;
