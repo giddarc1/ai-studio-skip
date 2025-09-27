@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { Image, Upload, Palette, Users, Camera, Wand2, User, LogIn, ArrowRight } from "lucide-react";
+import { Image, Upload, Palette, Users, Camera, Wand2, User, LogIn, History, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import { useAuth } from "@/hooks/useAuth";
 import { ImageGenerationForm } from "@/components/ImageGeneration/ImageGenerationForm";
+import { GenerationHistory } from "@/components/ImageGeneration/GenerationHistory";
+import { GenerationStats } from "@/components/ImageGeneration/GenerationStats";
 
 // Import images
 import heroImage from "@/assets/images-hero.jpg";
@@ -33,6 +36,7 @@ const Images = () => {
       title: "Plain Background Images",
       description: "Generate clean product shots with customizable backgrounds and lighting",
       badge: "Quick Setup",
+      category: "Basic",
       demoImage: plainBackgroundDemo
     },
     {
@@ -41,6 +45,7 @@ const Images = () => {
       title: "Background Replacement",
       description: "Replace backgrounds with AI-powered environment transformation",
       badge: "Popular",
+      category: "Basic",
       demoImage: jewelryAfter
     },
     {
@@ -49,6 +54,7 @@ const Images = () => {
       title: "AI Model Integration",
       description: "Generate images with AI models wearing or using your products",
       badge: "AI Powered",
+      category: "Advanced",
       demoImage: aiModelDemo
     },
     {
@@ -57,6 +63,7 @@ const Images = () => {
       title: "Real Model Integration", 
       description: "Create lifestyle shots with realistic model imagery",
       badge: "Realistic",
+      category: "Advanced",
       demoImage: apparelAfter
     },
     {
@@ -65,6 +72,7 @@ const Images = () => {
       title: "Campaign Photography",
       description: "Create marketing-ready campaign images for special occasions",
       badge: "Premium",
+      category: "Professional",
       demoImage: campaignDemo
     },
     {
@@ -73,9 +81,17 @@ const Images = () => {
       title: "Prompt-Based Generation",
       description: "Generate and edit images using natural language prompts",
       badge: "Flexible",
+      category: "Creative",
       demoImage: electronicsAfter
     }
   ];
+
+  const categories = {
+    "Basic": imageOptions.filter(opt => opt.category === "Basic"),
+    "Advanced": imageOptions.filter(opt => opt.category === "Advanced"),
+    "Professional": imageOptions.filter(opt => opt.category === "Professional"),
+    "Creative": imageOptions.filter(opt => opt.category === "Creative")
+  };
 
   const imageFeatures = [
     {
@@ -98,58 +114,9 @@ const Images = () => {
     }
   ];
 
-  const themeOptions = ["Traditional", "Modern", "Festival", "Minimalist", "Luxury", "Outdoor"];
-  const campaignStyles = ["Christmas", "Valentine's Day", "Summer Sale", "Black Friday", "New Year", "Spring Collection"];
-
-  const renderImageOptionDemo = (option: typeof imageOptions[0]) => {
-    if (!user) {
-      return (
-        <Card className="opacity-75 overflow-hidden">
-          <div className="relative h-48 overflow-hidden">
-            <img 
-              src={option.demoImage} 
-              alt={`${option.title} demo`} 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-              <div className="text-center text-white">
-                <LogIn className="h-8 w-8 mx-auto mb-2" />
-                <p className="text-sm">Sign in to access this feature</p>
-              </div>
-            </div>
-          </div>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-accent flex items-center justify-center">
-                  <option.icon className="h-5 w-5 text-accent" />
-                </div>
-                <div>
-                  <CardTitle className="text-lg">{option.title}</CardTitle>
-                  <Badge variant="secondary" className="mt-1">{option.badge}</Badge>
-                </div>
-              </div>
-            </div>
-            <CardDescription className="text-base mt-2">{option.description}</CardDescription>
-          </CardHeader>
-        </Card>
-      );
-    }
-
-    return (
-      <ImageGenerationForm
-        generationType={option.id}
-        title={option.title}
-        description={option.description}
-        badge={option.badge}
-        icon={option.icon}
-      />
-    );
-  };
-
   return (
     <div className="min-h-screen bg-background">
-      <title>Images - AI-Powered Product Photography Generation | Studio</title>
+      <title>Images - AI-Powered Product Photography Generation | Glo AI Studio</title>
       <meta name="description" content="Generate stunning product images with AI. Choose from 6 powerful options: plain backgrounds, model integration, campaign shots, and prompt-based editing." />
       
       <Header />
@@ -210,88 +177,171 @@ const Images = () => {
           </div>
         </section>
 
-        {/* Before/After Gallery */}
-        <section className="py-24 bg-secondary/30">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                See the Transformation
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Real examples of how our AI transforms ordinary product photos into professional images
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <div className="group">
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  <div className="relative overflow-hidden rounded-lg">
-                    <img src={jewelryBefore} alt="Jewelry before AI enhancement" className="w-full h-32 object-cover" />
-                    <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
-                  </div>
-                  <div className="relative overflow-hidden rounded-lg">
-                    <img src={jewelryAfter} alt="Jewelry after AI enhancement" className="w-full h-32 object-cover" />
-                    <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
-                  </div>
-                </div>
-                <h3 className="font-semibold text-center">Jewelry Enhancement</h3>
-              </div>
-
-              <div className="group">
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  <div className="relative overflow-hidden rounded-lg">
-                    <img src={apparelBefore} alt="Apparel before AI enhancement" className="w-full h-32 object-cover" />
-                    <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
-                  </div>
-                  <div className="relative overflow-hidden rounded-lg">
-                    <img src={apparelAfter} alt="Apparel after AI enhancement" className="w-full h-32 object-cover" />
-                    <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
-                  </div>
-                </div>
-                <h3 className="font-semibold text-center">Fashion Photography</h3>
-              </div>
-
-              <div className="group">
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  <div className="relative overflow-hidden rounded-lg">
-                    <img src={electronicsBefore} alt="Electronics before AI enhancement" className="w-full h-32 object-cover" />
-                    <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
-                  </div>
-                  <div className="relative overflow-hidden rounded-lg">
-                    <img src={electronicsAfter} alt="Electronics after AI enhancement" className="w-full h-32 object-cover" />
-                    <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
-                  </div>
-                </div>
-                <h3 className="font-semibold text-center">Tech Products</h3>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Image Generation Tools - Full Interface for Logged-in Users */}
-        <section className="py-24">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                6 Ways to Generate Images
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-xl mx-auto">
-                Choose the perfect tool for your image generation needs
-              </p>
-            </div>
-
-            {user ? (
+        {/* Clean Tab-Based Interface for Logged-in Users */}
+        {user ? (
+          <section className="py-12">
+            <div className="container mx-auto px-6">
               <div className="max-w-7xl mx-auto">
-                <div className="grid lg:grid-cols-2 gap-8">
-                  {imageOptions.map((option, index) => (
-                    <div key={index}>
-                      {renderImageOptionDemo(option)}
+                <Tabs defaultValue="overview" className="space-y-6">
+                  <TabsList className="grid w-full grid-cols-4 max-w-2xl mx-auto">
+                    <TabsTrigger value="overview" className="flex items-center gap-2">
+                      <BarChart3 className="h-4 w-4" />
+                      Overview
+                    </TabsTrigger>
+                    <TabsTrigger value="generate" className="flex items-center gap-2">
+                      <Wand2 className="h-4 w-4" />
+                      Generate
+                    </TabsTrigger>
+                    <TabsTrigger value="history" className="flex items-center gap-2">
+                      <History className="h-4 w-4" />
+                      History
+                    </TabsTrigger>
+                    <TabsTrigger value="templates" className="flex items-center gap-2">
+                      <Image className="h-4 w-4" />
+                      Gallery
+                    </TabsTrigger>
+                  </TabsList>
+
+                  {/* Overview Tab */}
+                  <TabsContent value="overview" className="space-y-6">
+                    <div className="text-center mb-8">
+                      <h2 className="text-3xl font-bold text-foreground mb-2">
+                        Welcome back, {user.user_metadata?.full_name || user.email?.split('@')[0]}!
+                      </h2>
+                      <p className="text-lg text-muted-foreground">
+                        Create stunning product photography with AI-powered tools
+                      </p>
                     </div>
-                  ))}
-                </div>
+                    <GenerationStats />
+                  </TabsContent>
+
+                  {/* Generate Tab */}
+                  <TabsContent value="generate" className="space-y-6">
+                    <div className="text-center mb-8">
+                      <h2 className="text-3xl font-bold text-foreground mb-2">
+                        Choose Your Generation Tool
+                      </h2>
+                      <p className="text-lg text-muted-foreground">
+                        Select the perfect tool for your image generation needs
+                      </p>
+                    </div>
+
+                    {/* Generation Tools by Category */}
+                    <div className="space-y-8">
+                      {Object.entries(categories).map(([category, options]) => (
+                        <div key={category}>
+                          <div className="mb-4">
+                            <h3 className="text-xl font-semibold text-foreground mb-2">{category} Tools</h3>
+                            <p className="text-muted-foreground text-sm">
+                              {category === "Basic" && "Perfect for quick product shots and simple edits"}
+                              {category === "Advanced" && "AI-powered model integration for lifestyle imagery"} 
+                              {category === "Professional" && "Marketing-ready campaign photography"}
+                              {category === "Creative" && "Flexible prompt-based generation and editing"}
+                            </p>
+                          </div>
+                          <div className="grid lg:grid-cols-2 gap-6">
+                            {options.map((option) => (
+                              <ImageGenerationForm
+                                key={option.id}
+                                generationType={option.id}
+                                title={option.title}
+                                description={option.description}
+                                badge={option.badge}
+                                icon={option.icon}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+
+                  {/* History Tab */}
+                  <TabsContent value="history" className="space-y-6">
+                    <div className="text-center mb-8">
+                      <h2 className="text-3xl font-bold text-foreground mb-2">
+                        Generation History
+                      </h2>
+                      <p className="text-lg text-muted-foreground">
+                        View and manage your previously generated images
+                      </p>
+                    </div>
+                    <GenerationHistory />
+                  </TabsContent>
+
+                  {/* Gallery Tab */}
+                  <TabsContent value="templates" className="space-y-6">
+                    <div className="text-center mb-8">
+                      <h2 className="text-3xl font-bold text-foreground mb-2">
+                        Inspiration Gallery
+                      </h2>
+                      <p className="text-lg text-muted-foreground">
+                        Browse examples and get inspiration for your next generation
+                      </p>
+                    </div>
+                    
+                    {/* Before/After Gallery */}
+                    <div className="grid md:grid-cols-3 gap-8">
+                      <div className="group">
+                        <div className="grid grid-cols-2 gap-2 mb-4">
+                          <div className="relative overflow-hidden rounded-lg">
+                            <img src={jewelryBefore} alt="Jewelry before AI enhancement" className="w-full h-32 object-cover" />
+                            <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
+                          </div>
+                          <div className="relative overflow-hidden rounded-lg">
+                            <img src={jewelryAfter} alt="Jewelry after AI enhancement" className="w-full h-32 object-cover" />
+                            <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
+                          </div>
+                        </div>
+                        <h3 className="font-semibold text-center">Jewelry Enhancement</h3>
+                      </div>
+
+                      <div className="group">
+                        <div className="grid grid-cols-2 gap-2 mb-4">
+                          <div className="relative overflow-hidden rounded-lg">
+                            <img src={apparelBefore} alt="Apparel before AI enhancement" className="w-full h-32 object-cover" />
+                            <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
+                          </div>
+                          <div className="relative overflow-hidden rounded-lg">
+                            <img src={apparelAfter} alt="Apparel after AI enhancement" className="w-full h-32 object-cover" />
+                            <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
+                          </div>
+                        </div>
+                        <h3 className="font-semibold text-center">Fashion Photography</h3>
+                      </div>
+
+                      <div className="group">
+                        <div className="grid grid-cols-2 gap-2 mb-4">
+                          <div className="relative overflow-hidden rounded-lg">
+                            <img src={electronicsBefore} alt="Electronics before AI enhancement" className="w-full h-32 object-cover" />
+                            <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
+                          </div>
+                          <div className="relative overflow-hidden rounded-lg">
+                            <img src={electronicsAfter} alt="Electronics after AI enhancement" className="w-full h-32 object-cover" />
+                            <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
+                          </div>
+                        </div>
+                        <h3 className="font-semibold text-center">Tech Products</h3>
+                      </div>
+                    </div>
+                  </TabsContent>
+                </Tabs>
               </div>
-            ) : (
+            </div>
+          </section>
+        ) : (
+          /* Sign-in prompt for non-logged users */
+          <section className="py-24">
+            <div className="container mx-auto px-6">
               <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-12">
+                  <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                    6 Ways to Generate Images
+                  </h2>
+                  <p className="text-xl text-muted-foreground max-w-xl mx-auto">
+                    Choose the perfect tool for your image generation needs
+                  </p>
+                </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {imageOptions.map((option, index) => (
                     <div key={index} className="bg-card rounded-xl p-6 shadow-card hover:shadow-lg transition-shadow duration-300">
@@ -317,16 +367,16 @@ const Images = () => {
                   ))}
                 </div>
               </div>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
 
         {/* Features Comparison */}
         <section className="py-24 bg-secondary/30">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Why Choose Images?
+                Why Choose Glo AI Studio?
               </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 Perfect for solo creators, small businesses, and quick turnaround projects
