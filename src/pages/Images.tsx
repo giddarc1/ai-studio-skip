@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Image, Upload, Palette, Users, Camera, Wand2, User, LogIn, History, BarChart3 } from "lucide-react";
+import { Image, Upload, Palette, Users, Camera, Wand2, User, LogIn, History, BarChart3, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -28,87 +28,90 @@ import versatileOptionsDemo from "@/assets/versatile-options-demo.jpg";
 
 const Images = () => {
   const { user, loading } = useAuth();
+  const [selectedTool, setSelectedTool] = useState<string | null>(null);
 
   const imageOptions = [
     {
       id: "plain_background" as const,
       icon: Palette,
-      title: "Plain Background Images",
-      description: "Generate clean product shots with customizable backgrounds and lighting",
-      badge: "Quick Setup",
+      title: "Plain Background",
+      description: "Clean product shots with custom backgrounds",
+      badge: "Quick",
       category: "Basic",
-      demoImage: plainBackgroundDemo
+      demoImage: plainBackgroundDemo,
+      popular: true
     },
     {
       id: "background_replacement" as const,
       icon: Image,
-      title: "Background Replacement",
-      description: "Replace backgrounds with AI-powered environment transformation",
+      title: "Background Replace",
+      description: "AI-powered background transformation",
       badge: "Popular",
-      category: "Basic",
-      demoImage: jewelryAfter
+      category: "Basic", 
+      demoImage: jewelryAfter,
+      popular: true
     },
     {
       id: "ai_model" as const,
       icon: Wand2,
-      title: "AI Model Integration",
-      description: "Generate images with AI models wearing or using your products",
+      title: "AI Model",
+      description: "Generate with AI models wearing products",
       badge: "AI Powered",
       category: "Advanced",
-      demoImage: aiModelDemo
+      demoImage: aiModelDemo,
+      popular: false
     },
     {
       id: "real_model" as const,
       icon: Users,
-      title: "Real Model Integration", 
-      description: "Create lifestyle shots with realistic model imagery",
+      title: "Real Model",
+      description: "Lifestyle shots with realistic models",
       badge: "Realistic",
       category: "Advanced",
-      demoImage: apparelAfter
+      demoImage: apparelAfter,
+      popular: false
     },
     {
       id: "campaign_shots" as const,
       icon: Camera,
-      title: "Campaign Photography",
-      description: "Create marketing-ready campaign images for special occasions",
+      title: "Campaign Shots",
+      description: "Marketing-ready campaign photography",
       badge: "Premium",
       category: "Professional",
-      demoImage: campaignDemo
+      demoImage: campaignDemo,
+      popular: false
     },
     {
       id: "prompt_generation" as const,
-      icon: Upload,
-      title: "Prompt-Based Generation",
-      description: "Generate and edit images using natural language prompts",
+      icon: Sparkles,
+      title: "Custom Prompt",
+      description: "Generate using natural language",
       badge: "Flexible",
       category: "Creative",
-      demoImage: electronicsAfter
+      demoImage: electronicsAfter,
+      popular: false
     }
   ];
 
-  const categories = {
-    "Basic": imageOptions.filter(opt => opt.category === "Basic"),
-    "Advanced": imageOptions.filter(opt => opt.category === "Advanced"),
-    "Professional": imageOptions.filter(opt => opt.category === "Professional"),
-    "Creative": imageOptions.filter(opt => opt.category === "Creative")
-  };
+  const popularTools = imageOptions.filter(tool => tool.popular);
+  const allTools = imageOptions;
 
   const imageFeatures = [
     {
       title: "Instant Results",
-      description: "Generate professional images in minutes, not hours. Perfect for quick projects and immediate needs.",
+      description: "Generate professional images in minutes, not hours.",
       icon: Wand2,
       image: instantResultsDemo
     },
     {
-      title: "Solo Friendly",
-      description: "No team coordination needed. Simple workflows designed for individual creators and small businesses.",
+      title: "Solo Friendly", 
+      description: "Simple workflows for individual creators.",
       icon: User,
       image: soloFriendlyDemo
     },
     {
       title: "Versatile Options",
-      description: "6 specialized tools covering everything from basic backgrounds to complex campaign photography.",
+      description: "6 specialized AI-powered generation tools.",
       icon: Image,
       image: versatileOptionsDemo
     }
@@ -182,181 +185,212 @@ const Images = () => {
                   </p>
                 </div>
 
-                <Tabs defaultValue="overview" className="space-y-8">
-                  <TabsList className="grid w-full grid-cols-4 max-w-2xl mx-auto">
-                    <TabsTrigger value="overview" className="flex items-center gap-2">
+                <Tabs defaultValue="dashboard" className="space-y-8">
+                  <TabsList className="grid w-full grid-cols-3 max-w-lg mx-auto">
+                    <TabsTrigger value="dashboard" className="flex items-center gap-2">
                       <BarChart3 className="h-4 w-4" />
-                      Overview
-                    </TabsTrigger>
-                    <TabsTrigger value="generate" className="flex items-center gap-2">
-                      <Wand2 className="h-4 w-4" />
-                      Generate
+                      Dashboard
                     </TabsTrigger>
                     <TabsTrigger value="history" className="flex items-center gap-2">
                       <History className="h-4 w-4" />
                       History
                     </TabsTrigger>
-                    <TabsTrigger value="templates" className="flex items-center gap-2">
+                    <TabsTrigger value="gallery" className="flex items-center gap-2">
                       <Image className="h-4 w-4" />
                       Gallery
                     </TabsTrigger>
                   </TabsList>
 
-                  {/* Overview Tab */}
-                  <TabsContent value="overview" className="space-y-6">
-                    <div className="text-center mb-8">
-                      <h2 className="text-3xl font-bold text-foreground mb-2">
-                        Welcome back, {user.user_metadata?.full_name || user.email?.split('@')[0]}!
-                      </h2>
-                      <p className="text-lg text-muted-foreground">
-                        Create stunning product photography with AI-powered tools
-                      </p>
-                    </div>
-                    <GenerationStats />
-                  </TabsContent>
-
-                  {/* Generate Tab */}
-                  <TabsContent value="generate" className="space-y-8">
-                    <div className="text-center mb-6">
-                      <h2 className="text-2xl font-bold text-foreground mb-2">
-                        AI Image Generation
-                      </h2>
-                      <p className="text-muted-foreground">
-                        Choose your tool and start creating
-                      </p>
-                    </div>
-
-                    {/* Simplified Generation Tools Grid */}
-                    <div className="grid gap-8">
-                      {/* Basic Tools */}
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="w-2 h-8 bg-gradient-premium rounded-full"></div>
-                          <h3 className="text-lg font-semibold text-foreground">Quick & Simple</h3>
+                  {/* Dashboard Tab */}
+                  <TabsContent value="dashboard" className="space-y-8">
+                    {!selectedTool ? (
+                      <>
+                        {/* Welcome Section */}
+                        <div className="text-center mb-8">
+                          <h2 className="text-2xl font-bold text-foreground mb-2">
+                            Welcome back, {user.user_metadata?.full_name || user.email?.split('@')[0]}!
+                          </h2>
+                          <p className="text-muted-foreground">
+                            Create stunning product photography with AI
+                          </p>
                         </div>
-                        <div className="grid md:grid-cols-2 gap-4">
-                          {categories.Basic.map((option) => (
+
+                        {/* Stats Overview */}
+                        <GenerationStats />
+
+                        {/* Quick Access - Popular Tools */}
+                        <div className="space-y-6">
+                          <div className="flex items-center gap-3">
+                            <div className="w-1 h-8 bg-gradient-premium rounded-full"></div>
+                            <h3 className="text-xl font-semibold text-foreground">Quick Start</h3>
+                          </div>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            {popularTools.map((tool) => (
+                              <Card 
+                                key={tool.id} 
+                                className="cursor-pointer hover:shadow-lg transition-all duration-200 group"
+                                onClick={() => setSelectedTool(tool.id)}
+                              >
+                                <CardHeader className="pb-4">
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                      <div className="w-10 h-10 rounded-lg bg-gradient-accent flex items-center justify-center">
+                                        <tool.icon className="h-5 w-5 text-accent" />
+                                      </div>
+                                      <div>
+                                        <CardTitle className="text-lg">{tool.title}</CardTitle>
+                                        <Badge variant="secondary" className="text-xs mt-1">{tool.badge}</Badge>
+                                      </div>
+                                    </div>
+                                    <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                                  </div>
+                                </CardHeader>
+                                <CardContent>
+                                  <CardDescription>{tool.description}</CardDescription>
+                                </CardContent>
+                              </Card>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* All Tools Grid */}
+                        <div className="space-y-6">
+                          <div className="flex items-center gap-3">
+                            <div className="w-1 h-8 bg-gradient-accent rounded-full"></div>
+                            <h3 className="text-xl font-semibold text-foreground">All Tools</h3>
+                          </div>
+                          <div className="grid md:grid-cols-3 gap-4">
+                            {allTools.map((tool) => (
+                              <Card 
+                                key={tool.id} 
+                                className="cursor-pointer hover:shadow-md transition-all duration-200 group"
+                                onClick={() => setSelectedTool(tool.id)}
+                              >
+                                <CardHeader className="pb-3">
+                                  <div className="flex items-center justify-between">
+                                    <div className="w-8 h-8 rounded-lg bg-gradient-subtle flex items-center justify-center">
+                                      <tool.icon className="h-4 w-4" />
+                                    </div>
+                                    <Badge variant="outline" className="text-xs">{tool.badge}</Badge>
+                                  </div>
+                                  <CardTitle className="text-base">{tool.title}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                  <CardDescription className="text-sm line-clamp-2">
+                                    {tool.description}
+                                  </CardDescription>
+                                </CardContent>
+                              </Card>
+                            ))}
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      /* Selected Tool Form */
+                      <div className="space-y-6">
+                        <div className="flex items-center gap-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => setSelectedTool(null)}
+                            className="gap-2"
+                          >
+                            ← Back to Tools
+                          </Button>
+                        </div>
+                        
+                        {(() => {
+                          const tool = allTools.find(t => t.id === selectedTool);
+                          return tool ? (
                             <ImageGenerationForm
-                              key={option.id}
-                              generationType={option.id}
-                              title={option.title}
-                              description={option.description}
-                              badge={option.badge}
-                              icon={option.icon}
+                              generationType={tool.id}
+                              title={tool.title}
+                              description={tool.description}
+                              badge={tool.badge}
+                              icon={tool.icon}
                             />
-                          ))}
-                        </div>
+                          ) : null;
+                        })()}
                       </div>
-
-                      {/* Advanced Tools */}
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="w-2 h-8 bg-gradient-accent rounded-full"></div>
-                          <h3 className="text-lg font-semibold text-foreground">AI Models</h3>
-                        </div>
-                        <div className="grid md:grid-cols-2 gap-4">
-                          {categories.Advanced.map((option) => (
-                            <ImageGenerationForm
-                              key={option.id}
-                              generationType={option.id}
-                              title={option.title}
-                              description={option.description}
-                              badge={option.badge}
-                              icon={option.icon}
-                            />
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Professional & Creative Tools */}
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="w-2 h-8 bg-gradient-subtle rounded-full"></div>
-                          <h3 className="text-lg font-semibold text-foreground">Advanced Creation</h3>
-                        </div>
-                        <div className="grid md:grid-cols-2 gap-4">
-                          {[...categories.Professional, ...categories.Creative].map((option) => (
-                            <ImageGenerationForm
-                              key={option.id}
-                              generationType={option.id}
-                              title={option.title}
-                              description={option.description}
-                              badge={option.badge}
-                              icon={option.icon}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                    )}
                   </TabsContent>
 
                   {/* History Tab */}
                   <TabsContent value="history" className="space-y-6">
                     <div className="text-center mb-8">
-                      <h2 className="text-3xl font-bold text-foreground mb-2">
+                      <h2 className="text-2xl font-bold text-foreground mb-2">
                         Generation History
                       </h2>
-                      <p className="text-lg text-muted-foreground">
-                        View and manage your previously generated images
+                      <p className="text-muted-foreground">
+                        View and manage your generated images
                       </p>
                     </div>
                     <GenerationHistory />
                   </TabsContent>
 
                   {/* Gallery Tab */}
-                  <TabsContent value="templates" className="space-y-6">
+                  <TabsContent value="gallery" className="space-y-6">
                     <div className="text-center mb-8">
-                      <h2 className="text-3xl font-bold text-foreground mb-2">
+                      <h2 className="text-2xl font-bold text-foreground mb-2">
                         Inspiration Gallery
                       </h2>
-                      <p className="text-lg text-muted-foreground">
-                        Browse examples and get inspiration for your next generation
+                      <p className="text-muted-foreground">
+                        Browse examples and get inspiration
                       </p>
                     </div>
                     
                     {/* Before/After Gallery */}
-                    <div className="grid md:grid-cols-3 gap-8">
-                      <div className="group">
-                        <div className="grid grid-cols-2 gap-2 mb-4">
-                          <div className="relative overflow-hidden rounded-lg">
-                            <img src={jewelryBefore} alt="Jewelry before AI enhancement" className="w-full h-32 object-cover" />
+                    <div className="grid md:grid-cols-3 gap-6">
+                      <Card className="overflow-hidden">
+                        <div className="grid grid-cols-2 gap-1">
+                          <div className="relative aspect-square">
+                            <img src={jewelryBefore} alt="Before" className="w-full h-full object-cover" />
                             <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
                           </div>
-                          <div className="relative overflow-hidden rounded-lg">
-                            <img src={jewelryAfter} alt="Jewelry after AI enhancement" className="w-full h-32 object-cover" />
+                          <div className="relative aspect-square">
+                            <img src={jewelryAfter} alt="After" className="w-full h-full object-cover" />
                             <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
                           </div>
                         </div>
-                        <h3 className="font-semibold text-center">Jewelry Enhancement</h3>
-                      </div>
+                        <CardHeader>
+                          <CardTitle className="text-base">Jewelry Enhancement</CardTitle>
+                          <CardDescription className="text-sm">Professional background replacement</CardDescription>
+                        </CardHeader>
+                      </Card>
 
-                      <div className="group">
-                        <div className="grid grid-cols-2 gap-2 mb-4">
-                          <div className="relative overflow-hidden rounded-lg">
-                            <img src={apparelBefore} alt="Apparel before AI enhancement" className="w-full h-32 object-cover" />
+                      <Card className="overflow-hidden">
+                        <div className="grid grid-cols-2 gap-1">
+                          <div className="relative aspect-square">
+                            <img src={apparelBefore} alt="Before" className="w-full h-full object-cover" />
                             <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
                           </div>
-                          <div className="relative overflow-hidden rounded-lg">
-                            <img src={apparelAfter} alt="Apparel after AI enhancement" className="w-full h-32 object-cover" />
+                          <div className="relative aspect-square">
+                            <img src={apparelAfter} alt="After" className="w-full h-full object-cover" />
                             <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
                           </div>
                         </div>
-                        <h3 className="font-semibold text-center">Fashion Photography</h3>
-                      </div>
+                        <CardHeader>
+                          <CardTitle className="text-base">Fashion Photography</CardTitle>
+                          <CardDescription className="text-sm">AI model integration</CardDescription>
+                        </CardHeader>
+                      </Card>
 
-                      <div className="group">
-                        <div className="grid grid-cols-2 gap-2 mb-4">
-                          <div className="relative overflow-hidden rounded-lg">
-                            <img src={electronicsBefore} alt="Electronics before AI enhancement" className="w-full h-32 object-cover" />
+                      <Card className="overflow-hidden">
+                        <div className="grid grid-cols-2 gap-1">
+                          <div className="relative aspect-square">
+                            <img src={electronicsBefore} alt="Before" className="w-full h-full object-cover" />
                             <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">Before</div>
                           </div>
-                          <div className="relative overflow-hidden rounded-lg">
-                            <img src={electronicsAfter} alt="Electronics after AI enhancement" className="w-full h-32 object-cover" />
+                          <div className="relative aspect-square">
+                            <img src={electronicsAfter} alt="After" className="w-full h-full object-cover" />
                             <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">After</div>
                           </div>
                         </div>
-                        <h3 className="font-semibold text-center">Tech Products</h3>
-                      </div>
+                        <CardHeader>
+                          <CardTitle className="text-base">Tech Products</CardTitle>
+                          <CardDescription className="text-sm">Plain background generation</CardDescription>
+                        </CardHeader>
+                      </Card>
                     </div>
                   </TabsContent>
                 </Tabs>
