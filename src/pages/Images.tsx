@@ -7,7 +7,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
+import { useAuth } from "@/hooks/useAuth";
 
 // Import images
 import heroImage from "@/assets/images-hero.jpg";
@@ -25,7 +27,7 @@ import soloFriendlyDemo from "@/assets/solo-friendly-demo.jpg";
 import versatileOptionsDemo from "@/assets/versatile-options-demo.jpg";
 
 const Images = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user, loading } = useAuth();
 
   const imageOptions = [
     {
@@ -109,7 +111,7 @@ const Images = () => {
   const campaignStyles = ["Christmas", "Valentine's Day", "Summer Sale", "Black Friday", "New Year", "Spring Collection"];
 
   const renderImageOptionDemo = (option: typeof imageOptions[0]) => {
-    if (!isLoggedIn) {
+    if (!user) {
       return (
         <Card className="opacity-75 overflow-hidden">
           <div className="relative h-48 overflow-hidden">
@@ -409,15 +411,22 @@ const Images = () => {
                   to complex campaign photography - create professional images in minutes.
                 </p>
                 
-                {!isLoggedIn ? (
+                {loading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-muted animate-pulse" />
+                    <span className="text-muted-foreground">Loading...</span>
+                  </div>
+                ) : !user ? (
                   <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
                     <Button 
                       size="lg" 
                       className="bg-gradient-premium hover:opacity-90 text-white px-8 py-4 text-lg"
-                      onClick={() => setIsLoggedIn(true)}
+                      asChild
                     >
-                      <LogIn className="w-5 h-5 mr-2" />
-                      Sign In to Generate
+                      <Link to="/sign-in">
+                        <LogIn className="w-5 h-5 mr-2" />
+                        Sign In to Generate
+                      </Link>
                     </Button>
                     <p className="text-sm text-muted-foreground">
                       Sign in to access all image generation tools
@@ -426,7 +435,7 @@ const Images = () => {
                 ) : (
                   <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
                     <User className="w-4 h-4 mr-2" />
-                    Signed In - All Tools Available
+                    Welcome {user.user_metadata?.full_name || user.email?.split('@')[0]}! All Tools Available
                   </Badge>
                 )}
               </div>
@@ -528,7 +537,7 @@ const Images = () => {
                           <Badge variant="secondary" className="text-xs">{option.badge}</Badge>
                         </div>
                         <p className="text-muted-foreground text-sm">{option.description}</p>
-                        {!isLoggedIn && (
+                        {!user && (
                           <div className="mt-3 flex items-center gap-1 text-xs text-muted-foreground">
                             <LogIn className="h-3 w-3" />
                             <span>Sign in to access</span>
@@ -583,7 +592,7 @@ const Images = () => {
         </section>
 
         {/* CTA Section */}
-        {!isLoggedIn && (
+        {!user && !loading && (
           <section className="py-24 bg-gradient-subtle">
             <div className="container mx-auto px-6 text-center">
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
@@ -595,10 +604,12 @@ const Images = () => {
               <Button 
                 size="lg" 
                 className="bg-gradient-premium hover:opacity-90 text-white px-8 py-4 text-lg"
-                onClick={() => setIsLoggedIn(true)}
+                asChild
               >
-                <LogIn className="w-5 h-5 mr-2" />
-                Sign In Now
+                <Link to="/sign-in">
+                  <LogIn className="w-5 h-5 mr-2" />
+                  Sign In Now
+                </Link>
               </Button>
             </div>
           </section>
