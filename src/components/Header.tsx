@@ -23,6 +23,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/lib/supabase";
 import { useToast } from "@/hooks/use-toast";
 
+// Clean Header component without sidebar dependencies
 const Header = () => {
   const { user, loading } = useAuth();
   const { toast } = useToast();
