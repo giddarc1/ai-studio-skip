@@ -36,7 +36,8 @@ const SignIn = () => {
         description: "You have successfully signed in.",
       });
 
-      navigate("/");
+      // Force a page refresh to ensure auth state updates properly
+      window.location.href = "/";
     } catch (error: any) {
       toast({
         title: "Sign in failed",

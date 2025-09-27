@@ -80,13 +80,20 @@ const SignUp = () => {
           title: "Check your email!",
           description: "We've sent you a confirmation link to complete your registration.",
         });
-      } else {
-        // Direct sign up without email confirmation
+      } else if (data.user && data.session) {
+        // Direct sign up with session - user is signed in
         toast({
           title: "Welcome to Lens AI Studio!",
           description: "Your account has been created successfully.",
         });
-        navigate("/");
+        // Force a page refresh to ensure auth state updates properly
+        window.location.href = "/";
+      } else {
+        // Fallback case
+        toast({
+          title: "Account created!",
+          description: "Please check your email to complete registration.",
+        });
       }
     } catch (error: any) {
       console.error('Sign up error:', error);
