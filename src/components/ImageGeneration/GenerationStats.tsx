@@ -124,28 +124,6 @@ export const GenerationStats: React.FC = () => {
         </Card>
       </div>
 
-      {/* Welcome Message for New Users */}
-      {stats.totalGenerations === 0 && (
-        <Card className="bg-gradient-subtle border-premium/20">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Zap className="h-5 w-5 text-premium" />
-              Welcome to Glo AI Studio!
-            </CardTitle>
-            <CardDescription>
-              Get started by choosing one of our 6 powerful image generation tools below.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-2">
-              <Badge variant="outline" className="text-xs">Quick Generation</Badge>
-              <Badge variant="outline" className="text-xs">Professional Results</Badge>
-              <Badge variant="outline" className="text-xs">Multiple Formats</Badge>
-              <Badge variant="outline" className="text-xs">AI-Powered</Badge>
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Quick Tips for Users */}
       {stats.totalGenerations > 0 && stats.totalGenerations < 5 && (
