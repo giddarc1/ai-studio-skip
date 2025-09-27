@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
 import { Eye, EyeOff, Camera } from "lucide-react";
+import Header from "@/components/Header";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -72,7 +73,8 @@ const SignIn = () => {
       <title>Sign In | Lens AI Studio - Professional AI Product Photography</title>
       <meta name="description" content="Sign in to your Lens AI Studio account to access professional AI-powered product photography tools and transform your product images." />
       
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background/95 to-primary/5 p-4">
+      <Header />
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background/95 to-primary/5 p-4 pt-20">
         <div className="w-full max-w-md space-y-8">
           {/* Logo and Header */}
           <div className="text-center space-y-4">
