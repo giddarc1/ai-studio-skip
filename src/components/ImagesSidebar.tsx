@@ -103,23 +103,7 @@ export function ImagesSidebar({ selectedTool, onToolSelect }: ImagesSidebarProps
 
   return (
     <Sidebar className={open ? "w-64" : "w-14"} collapsible="icon">
-      {/* Header with Toggle */}
-      <div className="flex items-center justify-between p-3 border-b border-border">
-        {open && (
-          <h2 className="text-sm font-semibold text-foreground">Navigation</h2>
-        )}
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={toggleSidebar}
-          className="h-8 w-8 p-0 hover:bg-muted"
-          title={open ? "Hide sidebar (B)" : "Show sidebar (B)"}
-        >
-          {open ? <ChevronLeft className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-        </Button>
-      </div>
-      
-      <SidebarContent className="space-y-4 pt-4">
+      <SidebarContent className="space-y-4 pt-2">
         {/* Main Navigation */}
         <SidebarGroup>
           <SidebarGroupContent>
