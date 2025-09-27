@@ -67,9 +67,11 @@ const Header = () => {
           </NavigationMenu>
 
           {/* Sign In Button */}
-          <Button variant="outline" className="border-premium/30 text-premium hover:bg-premium/10 hover:border-premium/50">
-            <User className="w-4 h-4 mr-2" />
-            Sign In
+          <Button variant="outline" className="border-premium/30 text-premium hover:bg-premium/10 hover:border-premium/50" asChild>
+            <Link to="/sign-in">
+              <User className="w-4 h-4 mr-2" />
+              Sign In
+            </Link>
           </Button>
         </div>
       </div>
