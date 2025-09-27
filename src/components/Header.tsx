@@ -59,7 +59,7 @@ const Header = () => {
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-premium rounded-full animate-pulse"></div>
             </div>
             <span className="text-2xl font-bold bg-gradient-premium bg-clip-text text-transparent">
-              Lens AI Studio
+              Glo AI Studio
             </span>
           </Link>
 

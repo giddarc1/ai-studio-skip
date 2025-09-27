@@ -83,7 +83,7 @@ const SignUp = () => {
       } else if (data.user && data.session) {
         // Direct sign up with session - user is signed in
         toast({
-          title: "Welcome to Lens AI Studio!",
+          title: "Welcome to Glo AI Studio!",
           description: "Your account has been created successfully.",
         });
         // Force a page refresh to ensure auth state updates properly
@@ -146,8 +146,8 @@ const SignUp = () => {
   return (
     <>
       {/* SEO meta tags */}
-      <title>Sign Up | Lens AI Studio - Create Your Account</title>
-      <meta name="description" content="Create your Lens AI Studio account to start transforming your product images with professional AI-powered photography tools." />
+      <title>Sign Up | Glo AI Studio - Create Your Account</title>
+      <meta name="description" content="Create your Glo AI Studio account to start transforming your product images with professional AI-powered photography tools." />
       
       <Header />
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background/95 to-primary/5 p-4 pt-20">
@@ -160,7 +160,7 @@ const SignUp = () => {
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-primary via-primary-glow to-accent rounded-full opacity-80" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent">
-                Lens AI Studio
+                Glo AI Studio
               </span>
             </div>
             <div className="space-y-2">

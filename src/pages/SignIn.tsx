@@ -82,8 +82,8 @@ const SignIn = () => {
   return (
     <>
       {/* SEO meta tags */}
-      <title>Sign In | Lens AI Studio - Professional AI Product Photography</title>
-      <meta name="description" content="Sign in to your Lens AI Studio account to access professional AI-powered product photography tools and transform your product images." />
+      <title>Sign In | Glo AI Studio - Professional AI Product Photography</title>
+      <meta name="description" content="Sign in to your Glo AI Studio account to access professional AI-powered product photography tools and transform your product images." />
       
       <Header />
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background/95 to-primary/5 p-4 pt-20">
@@ -96,7 +96,7 @@ const SignIn = () => {
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-primary via-primary-glow to-accent rounded-full opacity-80" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent">
-                Lens AI Studio
+                Glo AI Studio
               </span>
             </div>
             <div className="space-y-2">

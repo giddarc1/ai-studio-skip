@@ -158,7 +158,7 @@ const ProjectDetail = () => {
 
   return (
     <>
-      <title>{project.name} - Project Details | Lens AI Studio</title>
+      <title>{project.name} - Project Details | Glo AI Studio</title>
       <meta name="description" content={`View details and manage your ${project.name} project. Track progress, download results, and collaborate with your team.`} />
 
       <ProjectsLayout projects={projects}>

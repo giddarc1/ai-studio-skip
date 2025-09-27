@@ -197,7 +197,7 @@ const CreateProject = () => {
 
   return (
     <>
-      <title>Create New Project - Lens AI Studio</title>
+      <title>Create New Project - Glo AI Studio</title>
       <meta name="description" content="Create a new AI-powered product photography project. Set up your brief, select models, and upload products." />
 
       <div className="min-h-screen bg-background">

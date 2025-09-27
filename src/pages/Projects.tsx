@@ -139,7 +139,7 @@ const Projects = () => {
   if (user) {
     return (
       <>
-        <title>My Projects - Lens AI Studio</title>
+        <title>My Projects - Glo AI Studio</title>
         <meta name="description" content="Manage your AI-powered product photography projects. Create, edit, and track your professional product images." />
         
         <ProjectsLayout projects={projects}>
