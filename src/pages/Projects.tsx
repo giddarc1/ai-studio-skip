@@ -13,11 +13,11 @@ import {
 import Header from "@/components/Header";
 import ProjectCard from "@/components/ProjectCard";
 import CreateProjectDialog from "@/components/CreateProjectDialog";
-import ProjectDetailsModal from "@/components/ProjectDetailsModal";
 import { ProjectsLayout } from "@/components/ProjectsLayout";
 import { ProjectsDashboard } from "@/components/ProjectsDashboard";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 import projectsHero from "@/assets/projects-hero.jpg";
 import teamCollaborationDemo from "@/assets/team-collaboration-demo.jpg";
 import batchProcessingDemo from "@/assets/batch-processing-demo.jpg";
@@ -37,6 +37,7 @@ interface Project {
 const Projects = () => {
   const { user, loading } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [projects, setProjects] = useState<Project[]>([
     {
       id: '1',
@@ -70,8 +71,6 @@ const Projects = () => {
   ]);
   
   const [createProjectOpen, setCreateProjectOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [projectDetailsOpen, setProjectDetailsOpen] = useState(false);
 
   const handleCreateProject = async (projectData: any) => {
     // In real app, this would create project via Supabase
@@ -104,8 +103,7 @@ const Projects = () => {
   };
 
   const handleViewProject = (project: Project) => {
-    setSelectedProject(project);
-    setProjectDetailsOpen(true);
+    navigate(`/projects/${project.id}`);
   };
 
   const handleDownloadProject = (project: any) => {
@@ -158,15 +156,6 @@ const Projects = () => {
           open={createProjectOpen}
           onOpenChange={setCreateProjectOpen}
           onCreateProject={handleCreateProject}
-        />
-
-        <ProjectDetailsModal
-          project={selectedProject}
-          open={projectDetailsOpen}
-          onOpenChange={setProjectDetailsOpen}
-          onEdit={handleEditProject}
-          onDelete={handleDeleteProject}
-          onDownload={handleDownloadProject}
         />
       </>
     );
