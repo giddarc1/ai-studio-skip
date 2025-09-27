@@ -10,6 +10,7 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 import { 
   LayoutDashboard,
   Palette,
@@ -20,8 +21,9 @@ import {
   Sparkles,
   History,
   FolderOpen,
-  PanelLeftClose,
-  PanelLeftOpen
+  X,
+  ChevronLeft,
+  Menu
 } from "lucide-react";
 
 interface ImagesSidebarProps {
@@ -101,17 +103,23 @@ export function ImagesSidebar({ selectedTool, onToolSelect }: ImagesSidebarProps
 
   return (
     <Sidebar className={open ? "w-64" : "w-14"} collapsible="icon">
-      {/* Sidebar Toggle */}
-      <div className="flex justify-between items-center p-2">
+      {/* Header with Toggle */}
+      <div className="flex items-center justify-between p-3 border-b border-border">
         {open && (
-          <div className="text-xs text-muted-foreground px-2">
-            Press <kbd className="px-1 py-0.5 text-xs bg-muted rounded border font-mono">B</kbd> to toggle
-          </div>
+          <h2 className="text-sm font-semibold text-foreground">Navigation</h2>
         )}
-        <SidebarTrigger className="h-8 w-8 ml-auto" />
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={toggleSidebar}
+          className="h-8 w-8 p-0 hover:bg-muted"
+          title={open ? "Hide sidebar (B)" : "Show sidebar (B)"}
+        >
+          {open ? <ChevronLeft className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+        </Button>
       </div>
       
-      <SidebarContent className="space-y-4 pt-2">
+      <SidebarContent className="space-y-4 pt-4">
         {/* Main Navigation */}
         <SidebarGroup>
           <SidebarGroupContent>
