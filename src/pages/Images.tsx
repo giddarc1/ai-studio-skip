@@ -124,52 +124,6 @@ const Images = () => {
       {/* Global Header only for non-logged users */}
       {!user && <Header />}
       <main className="min-h-screen">
-        {/* Hero Section - Only show for non-logged users */}
-        {!user && !loading && (
-          <section className="pt-24 pb-12 bg-gradient-subtle relative overflow-hidden">
-            <div className="container mx-auto px-6">
-              <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
-                <div className="text-center lg:text-left">
-                  <h1 className="text-5xl md:text-6xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-6">
-                    Images
-                  </h1>
-                  <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-                    Quick and powerful AI image generation for individual creators
-                  </p>
-                  <p className="text-lg text-muted-foreground mb-12">
-                    Transform your product photos with 6 specialized AI tools. From simple background changes 
-                    to complex campaign photography - create professional images in minutes.
-                  </p>
-                  
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-                    <Button 
-                      size="lg" 
-                      className="bg-gradient-premium hover:opacity-90 text-white px-8 py-4 text-lg"
-                      asChild
-                    >
-                      <Link to="/sign-in">
-                        <LogIn className="w-5 h-5 mr-2" />
-                        Sign In to Generate
-                      </Link>
-                    </Button>
-                    <p className="text-sm text-muted-foreground">
-                      Sign in to access all image generation tools
-                    </p>
-                  </div>
-                </div>
-                <div className="relative">
-                  <img 
-                    src={heroImage} 
-                    alt="AI-powered product photography transformation showcase" 
-                    className="rounded-2xl shadow-2xl w-full hover-scale"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
         {/* Clean Sidebar Interface for Logged-in Users */}
         {user ? (
           <>
