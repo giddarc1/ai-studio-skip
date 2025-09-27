@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import Header from "@/components/Header";
 import ProjectCard from "@/components/ProjectCard";
-import CreateProjectDialog from "@/components/CreateProjectDialog";
+import { CreateProjectWizard } from "@/components/CreateProjectWizard";
 import { ProjectsLayout } from "@/components/ProjectsLayout";
 import { ProjectsDashboard } from "@/components/ProjectsDashboard";
 import { useAuth } from "@/hooks/useAuth";
@@ -152,7 +152,7 @@ const Projects = () => {
           />
         </ProjectsLayout>
 
-        <CreateProjectDialog
+        <CreateProjectWizard
           open={createProjectOpen}
           onOpenChange={setCreateProjectOpen}
           onCreateProject={handleCreateProject}

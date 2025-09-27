@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { ProjectsLayout } from "@/components/ProjectsLayout";
+import { ProjectWorkflow } from "@/components/ProjectWorkflow";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 
@@ -19,6 +20,7 @@ interface Project {
   image_count: number;
   category: string;
   thumbnail_url?: string;
+  workflow_step?: number;
 }
 
 const ProjectDetail = () => {
@@ -37,7 +39,8 @@ const ProjectDetail = () => {
       updated_at: '2024-01-20T14:30:00Z',
       image_count: 12,
       category: 'apparel',
-      thumbnail_url: '/api/placeholder/300/200'
+      thumbnail_url: '/api/placeholder/300/200',
+      workflow_step: 4
     },
     {
       id: '2',
@@ -47,7 +50,8 @@ const ProjectDetail = () => {
       updated_at: '2024-01-22T09:00:00Z',
       image_count: 8,
       category: 'jewelry',
-      thumbnail_url: '/api/placeholder/300/200'
+      thumbnail_url: '/api/placeholder/300/200',
+      workflow_step: 3
     },
     {
       id: '3',
@@ -56,7 +60,8 @@ const ProjectDetail = () => {
       created_at: '2024-01-25T11:00:00Z',
       updated_at: '2024-01-25T11:00:00Z',
       image_count: 5,
-      category: 'electronics'
+      category: 'electronics',
+      workflow_step: 1
     }
   ]);
 
@@ -137,6 +142,15 @@ const ProjectDetail = () => {
     });
   };
 
+  const handleWorkflowStepComplete = (step: number, data: any) => {
+    toast({
+      title: "Step Completed",
+      description: `Workflow step ${step} completed successfully`,
+    });
+    // In real implementation, this would update the project in Supabase
+    console.log('Workflow step completed:', step, data);
+  };
+
   return (
     <>
       <title>{project.name} - Project Details | Lens AI Studio</title>
@@ -189,239 +203,200 @@ const ProjectDetail = () => {
 
           {/* Content */}
           <div className="p-6">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-              {/* Stats Cards */}
-              <div className="lg:col-span-4 grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <Card>
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-2">
-                      <Image className="h-4 w-4 text-muted-foreground" />
-                      <div>
-                        <p className="text-sm text-muted-foreground">Images</p>
-                        <p className="text-2xl font-bold">{project.image_count}</p>
+            <Tabs defaultValue="workflow" className="w-full">
+              <TabsList className="grid w-full grid-cols-4">
+                <TabsTrigger value="workflow">Workflow</TabsTrigger>
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="results">Results</TabsTrigger>
+                <TabsTrigger value="originals">Originals</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="workflow" className="space-y-6">
+                <ProjectWorkflow
+                  projectId={project.id}
+                  currentStep={project.workflow_step || 1}
+                  onStepComplete={handleWorkflowStepComplete}
+                />
+              </TabsContent>
+              
+              <TabsContent value="overview" className="space-y-6">
+                {/* Stats Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <Card>
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-2">
+                        <Image className="h-4 w-4 text-muted-foreground" />
+                        <div>
+                          <p className="text-sm text-muted-foreground">Images</p>
+                          <p className="text-2xl font-bold">{project.image_count}</p>
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-                
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-4 w-4 text-muted-foreground" />
+                        <div>
+                          <p className="text-sm text-muted-foreground">Created</p>
+                          <p className="text-sm font-medium">
+                            {new Date(project.created_at).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-2">
+                        <Users className="h-4 w-4 text-muted-foreground" />
+                        <div>
+                          <p className="text-sm text-muted-foreground">Collaborators</p>
+                          <p className="text-2xl font-bold">3</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-2">
+                        <Eye className="h-4 w-4 text-muted-foreground" />
+                        <div>
+                          <p className="text-sm text-muted-foreground">Views</p>
+                          <p className="text-2xl font-bold">24</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
                 <Card>
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-muted-foreground" />
+                  <CardHeader>
+                    <CardTitle>Project Details</CardTitle>
+                    <CardDescription>
+                      Basic information about this project
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium">Description</label>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {project.status === 'completed' 
+                          ? `Professional product photography project for ${project.category} category. All images have been processed and are ready for download.`
+                          : `This project is currently ${project.status}. Check back later for updates.`
+                        }
+                      </p>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <p className="text-sm text-muted-foreground">Created</p>
-                        <p className="text-sm font-medium">
-                          {new Date(project.created_at).toLocaleDateString()}
+                        <label className="text-sm font-medium">Category</label>
+                        <p className="text-sm text-muted-foreground mt-1 capitalize">{project.category}</p>
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium">Last Updated</label>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {new Date(project.updated_at).toLocaleDateString()}
                         </p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
+                {/* Activity Timeline */}
                 <Card>
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-2">
-                      <Users className="h-4 w-4 text-muted-foreground" />
-                      <div>
-                        <p className="text-sm text-muted-foreground">Collaborators</p>
-                        <p className="text-2xl font-bold">3</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-2">
-                      <Eye className="h-4 w-4 text-muted-foreground" />
-                      <div>
-                        <p className="text-sm text-muted-foreground">Views</p>
-                        <p className="text-2xl font-bold">24</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Main Content */}
-              <div className="lg:col-span-3">
-                <Tabs defaultValue="overview" className="w-full">
-                  <TabsList className="grid w-full grid-cols-3">
-                    <TabsTrigger value="overview">Overview</TabsTrigger>
-                    <TabsTrigger value="results">Results</TabsTrigger>
-                    <TabsTrigger value="originals">Originals</TabsTrigger>
-                  </TabsList>
-                  
-                  <TabsContent value="overview" className="space-y-6">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Project Details</CardTitle>
-                        <CardDescription>
-                          Basic information about this project
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
+                  <CardHeader>
+                    <CardTitle>Recent Activity</CardTitle>
+                    <CardDescription>
+                      Latest updates and changes to this project
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {project.status === 'completed' && (
+                        <div className="flex items-start gap-3">
+                          <CheckCircle className="h-4 w-4 text-green-600 mt-0.5" />
+                          <div>
+                            <p className="text-sm font-medium">Project completed</p>
+                            <p className="text-xs text-muted-foreground">All images processed successfully</p>
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex items-start gap-3">
+                        <Clock className="h-4 w-4 text-blue-600 mt-0.5" />
                         <div>
-                          <label className="text-sm font-medium">Description</label>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            {project.status === 'completed' 
-                              ? `Professional product photography project for ${project.category} category. All images have been processed and are ready for download.`
-                              : `This project is currently ${project.status}. Check back later for updates.`
-                            }
+                          <p className="text-sm font-medium">Project created</p>
+                          <p className="text-xs text-muted-foreground">
+                            {new Date(project.created_at).toLocaleDateString()}
                           </p>
                         </div>
-                        
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <label className="text-sm font-medium">Category</label>
-                            <p className="text-sm text-muted-foreground mt-1 capitalize">{project.category}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="results" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Generated Results</CardTitle>
+                    <CardDescription>
+                      AI-generated product images ready for download
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {project.status === 'completed' ? (
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {Array.from({ length: project.image_count }).map((_, i) => (
+                          <div key={i} className="aspect-square bg-muted rounded-lg flex items-center justify-center">
+                            <Image className="h-8 w-8 text-muted-foreground" />
                           </div>
-                          <div>
-                            <label className="text-sm font-medium">Last Updated</label>
-                            <p className="text-sm text-muted-foreground mt-1">
-                              {new Date(project.updated_at).toLocaleDateString()}
-                            </p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Activity Timeline */}
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Recent Activity</CardTitle>
-                        <CardDescription>
-                          Latest updates and changes to this project
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                          {project.status === 'completed' && (
-                            <div className="flex items-start gap-3">
-                              <CheckCircle className="h-4 w-4 text-green-600 mt-0.5" />
-                              <div>
-                                <p className="text-sm font-medium">Project completed</p>
-                                <p className="text-xs text-muted-foreground">All images processed successfully</p>
-                              </div>
-                            </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-8">
+                        <div className="flex justify-center mb-4">
+                          {project.status === 'processing' ? (
+                            <Loader className="h-8 w-8 animate-spin text-primary" />
+                          ) : (
+                            <Clock className="h-8 w-8 text-muted-foreground" />
                           )}
-                          <div className="flex items-start gap-3">
-                            <Clock className="h-4 w-4 text-blue-600 mt-0.5" />
-                            <div>
-                              <p className="text-sm font-medium">Project created</p>
-                              <p className="text-xs text-muted-foreground">
-                                {new Date(project.created_at).toLocaleDateString()}
-                              </p>
-                            </div>
-                          </div>
                         </div>
-                      </CardContent>
-                    </Card>
-                  </TabsContent>
-                  
-                  <TabsContent value="results" className="space-y-6">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Generated Results</CardTitle>
-                        <CardDescription>
-                          AI-generated product images ready for download
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        {project.status === 'completed' ? (
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            {Array.from({ length: project.image_count }).map((_, i) => (
-                              <div key={i} className="aspect-square bg-muted rounded-lg flex items-center justify-center">
-                                <Image className="h-8 w-8 text-muted-foreground" />
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <div className="text-center py-8">
-                            <div className="flex justify-center mb-4">
-                              {project.status === 'processing' ? (
-                                <Loader className="h-8 w-8 animate-spin text-primary" />
-                              ) : (
-                                <Clock className="h-8 w-8 text-muted-foreground" />
-                              )}
-                            </div>
-                            <p className="text-muted-foreground">
-                              {project.status === 'processing' 
-                                ? 'Images are being processed...' 
-                                : 'No results available yet'
-                              }
-                            </p>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </TabsContent>
-                  
-                  <TabsContent value="originals" className="space-y-6">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Original Images</CardTitle>
-                        <CardDescription>
-                          Source images uploaded for this project
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                          {Array.from({ length: Math.ceil(project.image_count / 2) }).map((_, i) => (
-                            <div key={i} className="aspect-square bg-muted rounded-lg flex items-center justify-center">
-                              <Image className="h-8 w-8 text-muted-foreground" />
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </TabsContent>
-                </Tabs>
-              </div>
-
-              {/* Sidebar */}
-              <div className="lg:col-span-1 space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-base">Project Settings</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <Button variant="outline" size="sm" className="w-full justify-start">
-                      <Settings className="h-4 w-4 mr-2" />
-                      Configure
-                    </Button>
-                    <Button variant="outline" size="sm" className="w-full justify-start">
-                      <Users className="h-4 w-4 mr-2" />
-                      Collaborators
-                    </Button>
+                        <p className="text-muted-foreground">
+                          {project.status === 'processing' 
+                            ? 'Images are being processed...' 
+                            : 'No results available yet'
+                          }
+                        </p>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
-
+              </TabsContent>
+              
+              <TabsContent value="originals" className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-base">Export Options</CardTitle>
+                    <CardTitle>Original Images</CardTitle>
+                    <CardDescription>
+                      Source images uploaded for this project
+                    </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-3">
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="w-full justify-start"
-                      onClick={handleDownload}
-                      disabled={project.status !== 'completed'}
-                    >
-                      <Download className="h-4 w-4 mr-2" />
-                      Download All
-                    </Button>
-                    <p className="text-xs text-muted-foreground">
-                      {project.status === 'completed' 
-                        ? 'Download processed images in high resolution'
-                        : 'Download will be available when processing is complete'
-                      }
-                    </p>
+                  <CardContent>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {Array.from({ length: Math.ceil(project.image_count / 2) }).map((_, i) => (
+                        <div key={i} className="aspect-square bg-muted rounded-lg flex items-center justify-center">
+                          <Image className="h-8 w-8 text-muted-foreground" />
+                        </div>
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
-              </div>
-            </div>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </ProjectsLayout>
