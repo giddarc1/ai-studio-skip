@@ -121,7 +121,8 @@ const Images = () => {
       <title>Images - AI-Powered Product Photography Generation | Glo AI Studio</title>
       <meta name="description" content="Generate stunning product images with AI. Choose from 6 powerful options: plain backgrounds, model integration, campaign shots, and prompt-based editing." />
       
-      <Header />
+      {/* Global Header only for non-logged users */}
+      {!user && <Header />}
       <main className="min-h-screen">
         {/* Hero Section - Only show for non-logged users */}
         {!user && !loading && (
