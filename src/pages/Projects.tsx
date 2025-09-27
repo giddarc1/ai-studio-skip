@@ -21,6 +21,9 @@ import projectsHero from "@/assets/projects-hero.jpg";
 import teamCollaborationDemo from "@/assets/team-collaboration-demo.jpg";
 import batchProcessingDemo from "@/assets/batch-processing-demo.jpg";
 import qualityControlDemo from "@/assets/quality-control-demo.jpg";
+import summerJewelry from "@/assets/summer-collection-jewelry.jpg";
+import luxuryJewelry from "@/assets/jewelry-campaign-luxury.jpg";
+import smartJewelry from "@/assets/electronics-smart-jewelry.jpg";
 
 interface Project {
   id: string;
@@ -46,7 +49,7 @@ const Projects = () => {
       updated_at: '2024-01-20T14:30:00Z',
       image_count: 12,
       category: 'apparel',
-      thumbnail_url: '/api/placeholder/300/200'
+      thumbnail_url: summerJewelry
     },
     {
       id: '2',
@@ -56,7 +59,7 @@ const Projects = () => {
       updated_at: '2024-01-22T09:00:00Z',
       image_count: 8,
       category: 'jewelry',
-      thumbnail_url: '/api/placeholder/300/200'
+      thumbnail_url: luxuryJewelry
     },
     {
       id: '3',
@@ -65,7 +68,8 @@ const Projects = () => {
       created_at: '2024-01-25T11:00:00Z',
       updated_at: '2024-01-25T11:00:00Z',
       image_count: 5,
-      category: 'electronics'
+      category: 'electronics',
+      thumbnail_url: smartJewelry
     }
   ]);
   

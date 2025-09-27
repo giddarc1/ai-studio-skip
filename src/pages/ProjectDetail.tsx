@@ -11,6 +11,9 @@ import { ProjectWorkflow } from "@/components/ProjectWorkflow";
 import { ProjectCollaborators } from "@/components/ProjectCollaborators";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import summerJewelry from "@/assets/summer-collection-jewelry.jpg";
+import luxuryJewelry from "@/assets/jewelry-campaign-luxury.jpg";
+import smartJewelry from "@/assets/electronics-smart-jewelry.jpg";
 
 interface Project {
   id: string;
@@ -40,7 +43,7 @@ const ProjectDetail = () => {
       updated_at: '2024-01-20T14:30:00Z',
       image_count: 12,
       category: 'apparel',
-      thumbnail_url: '/api/placeholder/300/200',
+      thumbnail_url: summerJewelry,
       workflow_step: 4
     },
     {
@@ -51,7 +54,7 @@ const ProjectDetail = () => {
       updated_at: '2024-01-22T09:00:00Z',
       image_count: 8,
       category: 'jewelry',
-      thumbnail_url: '/api/placeholder/300/200',
+      thumbnail_url: luxuryJewelry,
       workflow_step: 3
     },
     {
@@ -62,6 +65,7 @@ const ProjectDetail = () => {
       updated_at: '2024-01-25T11:00:00Z',
       image_count: 5,
       category: 'electronics',
+      thumbnail_url: smartJewelry,
       workflow_step: 1
     }
   ]);
