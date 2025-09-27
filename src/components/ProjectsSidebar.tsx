@@ -147,17 +147,11 @@ export function ProjectsSidebar({ projects }: ProjectsSidebarProps) {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Team Section */}
+        {/* Settings Section */}
         <SidebarGroup>
-          <SidebarGroupLabel>Team</SidebarGroupLabel>
+          <SidebarGroupLabel>Settings</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton>
-                  <Users className="mr-2 h-4 w-4" />
-                  {open && <span>Collaborators</span>}
-                </SidebarMenuButton>
-              </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton>
                   <Settings className="mr-2 h-4 w-4" />

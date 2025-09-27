@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { ProjectsLayout } from "@/components/ProjectsLayout";
 import { ProjectWorkflow } from "@/components/ProjectWorkflow";
+import { ProjectCollaborators } from "@/components/ProjectCollaborators";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 
@@ -204,11 +205,12 @@ const ProjectDetail = () => {
           {/* Content */}
           <div className="p-6">
             <Tabs defaultValue="workflow" className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-5">
                 <TabsTrigger value="workflow">Workflow</TabsTrigger>
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="results">Results</TabsTrigger>
                 <TabsTrigger value="originals">Originals</TabsTrigger>
+                <TabsTrigger value="collaborators">Collaborators</TabsTrigger>
               </TabsList>
               
               <TabsContent value="workflow" className="space-y-6">
@@ -221,7 +223,7 @@ const ProjectDetail = () => {
               
               <TabsContent value="overview" className="space-y-6">
                 {/* Stats Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <Card>
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2">
@@ -243,18 +245,6 @@ const ProjectDetail = () => {
                           <p className="text-sm font-medium">
                             {new Date(project.created_at).toLocaleDateString()}
                           </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-2">
-                        <Users className="h-4 w-4 text-muted-foreground" />
-                        <div>
-                          <p className="text-sm text-muted-foreground">Collaborators</p>
-                          <p className="text-2xl font-bold">3</p>
                         </div>
                       </div>
                     </CardContent>
@@ -395,6 +385,10 @@ const ProjectDetail = () => {
                     </div>
                   </CardContent>
                 </Card>
+              </TabsContent>
+              
+              <TabsContent value="collaborators" className="space-y-6">
+                <ProjectCollaborators projectId={project.id} />
               </TabsContent>
             </Tabs>
           </div>
