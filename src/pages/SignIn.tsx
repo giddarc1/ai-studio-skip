@@ -88,17 +88,8 @@ const SignIn = () => {
       <Header />
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background/95 to-primary/5 p-4 pt-20">
         <div className="w-full max-w-md space-y-8">
-          {/* Logo and Header */}
+          {/* Header */}
           <div className="text-center space-y-4">
-            <div className="flex items-center justify-center space-x-3">
-              <div className="relative">
-                <Camera className="h-10 w-10 text-primary" />
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-primary via-primary-glow to-accent rounded-full opacity-80" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent">
-                Glo AI Studio
-              </span>
-            </div>
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tight">Welcome back</h1>
               <p className="text-muted-foreground">
