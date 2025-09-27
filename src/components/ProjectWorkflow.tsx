@@ -20,7 +20,6 @@ import {
   CheckCircle,
   Clock,
   ArrowRight,
-  ArrowLeft,
   Plus,
   X
 } from "lucide-react";
@@ -71,25 +70,29 @@ export const ProjectWorkflow = ({ projectId, currentStep, onStepComplete }: Proj
       id: 1,
       title: "Brief & Concept",
       description: "Define project vision and upload inspiration",
-      icon: FileText
+      icon: FileText,
+      status: activeStep > 1 ? 'completed' : activeStep === 1 ? 'active' : 'pending'
     },
     {
       id: 2,
       title: "Model Selection",
       description: "Choose AI models or upload model photos",
-      icon: Users
+      icon: Users,
+      status: activeStep > 2 ? 'completed' : activeStep === 2 ? 'active' : 'pending'
     },
     {
       id: 3,
       title: "Products Upload",
       description: "Upload product images on white background",
-      icon: Package
+      icon: Package,
+      status: activeStep > 3 ? 'completed' : activeStep === 3 ? 'active' : 'pending'
     },
     {
       id: 4,
       title: "Generate & Edit",
       description: "Create photoshoot images and refine",
-      icon: Wand2
+      icon: Wand2,
+      status: activeStep > 4 ? 'completed' : activeStep === 4 ? 'active' : 'pending'
     }
   ];
 
@@ -155,6 +158,13 @@ export const ProjectWorkflow = ({ projectId, currentStep, onStepComplete }: Proj
     });
   };
 
+  const getStepColor = (status: string) => {
+    switch (status) {
+      case 'completed': return 'bg-green-500';
+      case 'active': return 'bg-primary';
+      default: return 'bg-muted';
+    }
+  };
 
   const FileUploadCard = ({ 
     title, 
@@ -214,30 +224,18 @@ export const ProjectWorkflow = ({ projectId, currentStep, onStepComplete }: Proj
         
         <div className="grid grid-cols-4 gap-4">
           {steps.map((step) => (
-            <div 
-              key={step.id} 
-              className="flex items-center gap-3 cursor-pointer hover:bg-muted/50 p-2 rounded-lg transition-colors"
-              onClick={() => setActiveStep(step.id)}
-            >
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                step.id === activeStep ? 'bg-primary' : 
-                step.id < activeStep ? 'bg-green-500' : 
-                'bg-muted hover:bg-muted-foreground/20'
-              }`}>
-                {step.id < activeStep ? (
+            <div key={step.id} className="flex items-center gap-3">
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getStepColor(step.status)}`}>
+                {step.status === 'completed' ? (
                   <CheckCircle className="h-4 w-4 text-white" />
-                ) : step.id === activeStep ? (
+                ) : step.status === 'active' ? (
                   <Clock className="h-4 w-4 text-white" />
                 ) : (
                   <step.icon className="h-4 w-4 text-muted-foreground" />
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <p className={`text-sm font-medium truncate ${
-                  step.id === activeStep ? 'text-primary' : 'text-foreground'
-                }`}>
-                  {step.title}
-                </p>
+                <p className="text-sm font-medium truncate">{step.title}</p>
                 <p className="text-xs text-muted-foreground truncate">{step.description}</p>
               </div>
             </div>
@@ -248,13 +246,7 @@ export const ProjectWorkflow = ({ projectId, currentStep, onStepComplete }: Proj
       <Separator />
 
       {/* Step Content */}
-      <Tabs value={activeStep.toString()} onValueChange={(value) => setActiveStep(parseInt(value))} className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="1">Brief & Concept</TabsTrigger>
-          <TabsTrigger value="2">Model Selection</TabsTrigger>
-          <TabsTrigger value="3">Products Upload</TabsTrigger>
-          <TabsTrigger value="4">Generate & Edit</TabsTrigger>
-        </TabsList>
+      <Tabs value={activeStep.toString()} className="w-full">
         {/* Step 1: Brief and Concept Development */}
         <TabsContent value="1" className="space-y-6">
           <Card>
@@ -327,24 +319,14 @@ export const ProjectWorkflow = ({ projectId, currentStep, onStepComplete }: Proj
                 />
               </div>
 
-              <div className="flex gap-4">
-                <Button 
-                  onClick={() => handleStepComplete(1)} 
-                  className="flex-1"
-                  disabled={!briefData.description.trim()}
-                >
-                  Save & Continue
-                  <CheckCircle className="ml-2 h-4 w-4" />
-                </Button>
-                <Button 
-                  variant="outline"
-                  onClick={() => setActiveStep(2)} 
-                  className="flex-1"
-                >
-                  Next Step
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
+              <Button 
+                onClick={() => handleStepComplete(1)} 
+                className="w-full"
+                disabled={!briefData.description.trim()}
+              >
+                Complete Brief & Concept
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>
@@ -420,36 +402,18 @@ export const ProjectWorkflow = ({ projectId, currentStep, onStepComplete }: Proj
                 />
               )}
 
-              <div className="flex gap-4">
-                <Button 
-                  variant="outline"
-                  onClick={() => setActiveStep(1)} 
-                  className="flex-1"
-                >
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Previous Step
-                </Button>
-                <Button 
-                  onClick={() => handleStepComplete(2)} 
-                  className="flex-1"
-                  disabled={
-                    modelData.modelType === 'ai' 
-                      ? modelData.selectedAIModels.length === 0
-                      : modelData.uploadedModels.length === 0
-                  }
-                >
-                  Save & Continue
-                  <CheckCircle className="ml-2 h-4 w-4" />
-                </Button>
-                <Button 
-                  variant="outline"
-                  onClick={() => setActiveStep(3)} 
-                  className="flex-1"
-                >
-                  Next Step
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
+              <Button 
+                onClick={() => handleStepComplete(2)} 
+                className="w-full"
+                disabled={
+                  modelData.modelType === 'ai' 
+                    ? modelData.selectedAIModels.length === 0
+                    : modelData.uploadedModels.length === 0
+                }
+              >
+                Complete Model Selection
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>
@@ -501,32 +465,14 @@ export const ProjectWorkflow = ({ projectId, currentStep, onStepComplete }: Proj
                 </div>
               )}
 
-              <div className="flex gap-4">
-                <Button 
-                  variant="outline"
-                  onClick={() => setActiveStep(2)} 
-                  className="flex-1"
-                >
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Previous Step
-                </Button>
-                <Button 
-                  onClick={() => handleStepComplete(3)} 
-                  className="flex-1"
-                  disabled={productData.products.length === 0}
-                >
-                  Save & Continue
-                  <CheckCircle className="ml-2 h-4 w-4" />
-                </Button>
-                <Button 
-                  variant="outline"
-                  onClick={() => setActiveStep(4)} 
-                  className="flex-1"
-                >
-                  Next Step
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
+              <Button 
+                onClick={() => handleStepComplete(3)} 
+                className="w-full"
+                disabled={productData.products.length === 0}
+              >
+                Complete Products Upload
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>
@@ -573,24 +519,13 @@ export const ProjectWorkflow = ({ projectId, currentStep, onStepComplete }: Proj
                 ))}
               </div>
 
-              <div className="flex gap-4">
-                <Button 
-                  variant="outline"
-                  onClick={() => setActiveStep(3)} 
-                  className="flex-1"
-                >
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Previous Step
-                </Button>
-                <Button 
-                  onClick={() => handleStepComplete(4)} 
-                  className="flex-1"
-                  variant="default"
-                >
-                  Complete Project
-                  <CheckCircle className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
+              <Button 
+                onClick={() => handleStepComplete(4)} 
+                className="w-full"
+              >
+                Complete Project
+                <CheckCircle className="ml-2 h-4 w-4" />
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>
