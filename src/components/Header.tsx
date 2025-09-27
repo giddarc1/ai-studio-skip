@@ -30,22 +30,32 @@ const Header = () => {
 
   const handleSignOut = async () => {
     try {
+      // First try to sign out from Supabase
       const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      
+      // Even if there's a session error, we should still clear local state
+      if (error && error.message !== "Session from session_id claim in JWT does not exist") {
+        console.warn("Sign out warning:", error.message);
+      }
       
       toast({
         title: "Signed out successfully",
         description: "You have been signed out of your account.",
       });
       
-      // Force page refresh to clear auth state
+      // Force page refresh to clear auth state and redirect to home
       window.location.href = "/";
     } catch (error: any) {
+      console.error("Sign out error:", error);
+      
+      // Even if sign out fails, clear local state and redirect
       toast({
-        title: "Sign out failed",
-        description: error.message || "There was an error signing out.",
-        variant: "destructive",
+        title: "Signed out",
+        description: "You have been signed out of your account.",
       });
+      
+      // Force page refresh to clear any cached auth state
+      window.location.href = "/";
     }
   };
   return (
