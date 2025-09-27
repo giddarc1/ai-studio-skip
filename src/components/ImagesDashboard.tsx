@@ -202,8 +202,8 @@ export function ImagesDashboard({ selectedTool, onToolSelect, activeView }: Imag
     <div className="p-8">
       {/* Welcome Section */}
       <div className="mb-12">
-        <h1 className="text-2xl font-semibold text-foreground mb-2">
-          Welcome back, {user?.user_metadata?.full_name || user?.email?.split('@')[0]}
+        <h1 className="text-3xl font-semibold text-foreground mb-2">
+          Welcome to Glo AI Studio, {user?.user_metadata?.full_name || user?.email?.split('@')[0]}
         </h1>
         <p className="text-muted-foreground">
           Create stunning product photography with AI
