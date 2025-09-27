@@ -48,9 +48,19 @@ export function ImagesSidebar({ selectedTool, onToolSelect }: ImagesSidebarProps
       title: "AI Model"
     },
     {
+      id: "real_model" as const,
+      icon: Users,
+      title: "Real Model"
+    },
+    {
       id: "campaign_shots" as const,
       icon: Camera,
       title: "Campaign Shots"
+    },
+    {
+      id: "prompt_generation" as const,
+      icon: Sparkles,
+      title: "Custom Prompt"
     }
   ];
 
