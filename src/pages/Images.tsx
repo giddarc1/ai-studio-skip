@@ -169,10 +169,20 @@ const Images = () => {
 
         {/* Clean Tab-Based Interface for Logged-in Users */}
         {user ? (
-          <section className="py-12">
+          <section className="pt-24 pb-12">
             <div className="container mx-auto px-6">
               <div className="max-w-7xl mx-auto">
-                <Tabs defaultValue="overview" className="space-y-6">
+                {/* Page Header for Logged-in Users */}
+                <div className="text-center mb-12">
+                  <h1 className="text-4xl md:text-5xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-4">
+                    AI Image Studio
+                  </h1>
+                  <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                    Professional product photography powered by AI
+                  </p>
+                </div>
+
+                <Tabs defaultValue="overview" className="space-y-8">
                   <TabsList className="grid w-full grid-cols-4 max-w-2xl mx-auto">
                     <TabsTrigger value="overview" className="flex items-center gap-2">
                       <BarChart3 className="h-4 w-4" />
