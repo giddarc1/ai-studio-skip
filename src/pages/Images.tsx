@@ -121,28 +121,23 @@ const Images = () => {
       
       <Header />
       <main className="min-h-screen">
-        {/* Hero Section */}
-        <section className="pt-24 pb-12 bg-gradient-subtle relative overflow-hidden">
-          <div className="container mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
-              <div className="text-center lg:text-left">
-                <h1 className="text-5xl md:text-6xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-6">
-                  Images
-                </h1>
-                <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-                  Quick and powerful AI image generation for individual creators
-                </p>
-                <p className="text-lg text-muted-foreground mb-12">
-                  Transform your product photos with 6 specialized AI tools. From simple background changes 
-                  to complex campaign photography - create professional images in minutes.
-                </p>
-                
-                {loading ? (
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-muted animate-pulse" />
-                    <span className="text-muted-foreground">Loading...</span>
-                  </div>
-                ) : !user ? (
+        {/* Hero Section - Only show for non-logged users */}
+        {!user && !loading && (
+          <section className="pt-24 pb-12 bg-gradient-subtle relative overflow-hidden">
+            <div className="container mx-auto px-6">
+              <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+                <div className="text-center lg:text-left">
+                  <h1 className="text-5xl md:text-6xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-6">
+                    Images
+                  </h1>
+                  <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+                    Quick and powerful AI image generation for individual creators
+                  </p>
+                  <p className="text-lg text-muted-foreground mb-12">
+                    Transform your product photos with 6 specialized AI tools. From simple background changes 
+                    to complex campaign photography - create professional images in minutes.
+                  </p>
+                  
                   <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
                     <Button 
                       size="lg" 
@@ -158,24 +153,19 @@ const Images = () => {
                       Sign in to access all image generation tools
                     </p>
                   </div>
-                ) : (
-                  <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                    <User className="w-4 h-4 mr-2" />
-                    Welcome {user.user_metadata?.full_name || user.email?.split('@')[0]}! All Tools Available
-                  </Badge>
-                )}
-              </div>
-              <div className="relative">
-                <img 
-                  src={heroImage} 
-                  alt="AI-powered product photography transformation showcase" 
-                  className="rounded-2xl shadow-2xl w-full hover-scale"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+                </div>
+                <div className="relative">
+                  <img 
+                    src={heroImage} 
+                    alt="AI-powered product photography transformation showcase" 
+                    className="rounded-2xl shadow-2xl w-full hover-scale"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Clean Tab-Based Interface for Logged-in Users */}
         {user ? (
@@ -405,44 +395,46 @@ const Images = () => {
           </section>
         )}
 
-        {/* Features Comparison */}
-        <section className="py-24 bg-secondary/30">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Why Choose Glo AI Studio?
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Perfect for solo creators, small businesses, and quick turnaround projects
-              </p>
-            </div>
+        {/* Features Comparison - Only show for non-logged users */}
+        {!user && !loading && (
+          <section className="py-24 bg-secondary/30">
+            <div className="container mx-auto px-6">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                  Why Choose Glo AI Studio?
+                </h2>
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                  Perfect for solo creators, small businesses, and quick turnaround projects
+                </p>
+              </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {imageFeatures.map((feature, index) => (
-                <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                  <div className="aspect-video overflow-hidden">
-                    <img 
-                      src={feature.image} 
-                      alt={`${feature.title} demo interface`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <CardHeader className="pb-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-3">
-                      <feature.icon className="h-5 w-5 text-accent" />
+              <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                {imageFeatures.map((feature, index) => (
+                  <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    <div className="aspect-video overflow-hidden">
+                      <img 
+                        src={feature.image} 
+                        alt={`${feature.title} demo interface`}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    <CardTitle className="text-lg">{feature.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-sm">
-                      {feature.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
+                    <CardHeader className="pb-4">
+                      <div className="w-12 h-12 rounded-full bg-gradient-accent flex items-center justify-center mx-auto mb-3">
+                        <feature.icon className="h-5 w-5 text-accent" />
+                      </div>
+                      <CardTitle className="text-lg">{feature.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-sm">
+                        {feature.description}
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* CTA Section */}
         {!user && !loading && (
