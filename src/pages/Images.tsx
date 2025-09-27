@@ -216,43 +216,77 @@ const Images = () => {
                   </TabsContent>
 
                   {/* Generate Tab */}
-                  <TabsContent value="generate" className="space-y-6">
-                    <div className="text-center mb-8">
-                      <h2 className="text-3xl font-bold text-foreground mb-2">
-                        Choose Your Generation Tool
+                  <TabsContent value="generate" className="space-y-8">
+                    <div className="text-center mb-6">
+                      <h2 className="text-2xl font-bold text-foreground mb-2">
+                        AI Image Generation
                       </h2>
-                      <p className="text-lg text-muted-foreground">
-                        Select the perfect tool for your image generation needs
+                      <p className="text-muted-foreground">
+                        Choose your tool and start creating
                       </p>
                     </div>
 
-                    {/* Generation Tools by Category */}
-                    <div className="space-y-8">
-                      {Object.entries(categories).map(([category, options]) => (
-                        <div key={category}>
-                          <div className="mb-4">
-                            <h3 className="text-xl font-semibold text-foreground mb-2">{category} Tools</h3>
-                            <p className="text-muted-foreground text-sm">
-                              {category === "Basic" && "Perfect for quick product shots and simple edits"}
-                              {category === "Advanced" && "AI-powered model integration for lifestyle imagery"} 
-                              {category === "Professional" && "Marketing-ready campaign photography"}
-                              {category === "Creative" && "Flexible prompt-based generation and editing"}
-                            </p>
-                          </div>
-                          <div className="grid lg:grid-cols-2 gap-6">
-                            {options.map((option) => (
-                              <ImageGenerationForm
-                                key={option.id}
-                                generationType={option.id}
-                                title={option.title}
-                                description={option.description}
-                                badge={option.badge}
-                                icon={option.icon}
-                              />
-                            ))}
-                          </div>
+                    {/* Simplified Generation Tools Grid */}
+                    <div className="grid gap-8">
+                      {/* Basic Tools */}
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-2 h-8 bg-gradient-premium rounded-full"></div>
+                          <h3 className="text-lg font-semibold text-foreground">Quick & Simple</h3>
                         </div>
-                      ))}
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {categories.Basic.map((option) => (
+                            <ImageGenerationForm
+                              key={option.id}
+                              generationType={option.id}
+                              title={option.title}
+                              description={option.description}
+                              badge={option.badge}
+                              icon={option.icon}
+                            />
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Advanced Tools */}
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-2 h-8 bg-gradient-accent rounded-full"></div>
+                          <h3 className="text-lg font-semibold text-foreground">AI Models</h3>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {categories.Advanced.map((option) => (
+                            <ImageGenerationForm
+                              key={option.id}
+                              generationType={option.id}
+                              title={option.title}
+                              description={option.description}
+                              badge={option.badge}
+                              icon={option.icon}
+                            />
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Professional & Creative Tools */}
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-2 h-8 bg-gradient-subtle rounded-full"></div>
+                          <h3 className="text-lg font-semibold text-foreground">Advanced Creation</h3>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {[...categories.Professional, ...categories.Creative].map((option) => (
+                            <ImageGenerationForm
+                              key={option.id}
+                              generationType={option.id}
+                              title={option.title}
+                              description={option.description}
+                              badge={option.badge}
+                              icon={option.icon}
+                            />
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </TabsContent>
 
