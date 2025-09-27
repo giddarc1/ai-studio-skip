@@ -20,7 +20,7 @@ import {
   Clock, 
   CheckCircle, 
   XCircle,
-  Loader,
+  RotateCcw,
   Archive,
   Settings,
   Users
@@ -63,9 +63,9 @@ export function ProjectsSidebar({ projects }: ProjectsSidebarProps) {
       color: "text-muted-foreground"
     },
     {
-      title: "Processing",
+      title: "In Progress",
       url: "/projects?status=processing", 
-      icon: Loader,
+      icon: RotateCcw,
       count: counts.processing,
       color: "text-primary"
     },
