@@ -14,6 +14,8 @@ import Header from "@/components/Header";
 import ProjectCard from "@/components/ProjectCard";
 import CreateProjectDialog from "@/components/CreateProjectDialog";
 import ProjectDetailsModal from "@/components/ProjectDetailsModal";
+import { ProjectsLayout } from "@/components/ProjectsLayout";
+import { ProjectsDashboard } from "@/components/ProjectsDashboard";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import projectsHero from "@/assets/projects-hero.jpg";
@@ -67,9 +69,6 @@ const Projects = () => {
     }
   ]);
   
-  const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [categoryFilter, setCategoryFilter] = useState('all');
   const [createProjectOpen, setCreateProjectOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [projectDetailsOpen, setProjectDetailsOpen] = useState(false);
@@ -118,131 +117,42 @@ const Projects = () => {
 
   // Filter projects based on search and filters
   const filteredProjects = projects.filter(project => {
-    const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || project.status === statusFilter;
-    const matchesCategory = categoryFilter === 'all' || project.category === categoryFilter;
+    const matchesSearch = project.name.toLowerCase().includes(''); // Will be handled by ProjectsDashboard
+    const matchesStatus = true; // Will be handled by ProjectsDashboard
+    const matchesCategory = true; // Will be handled by ProjectsDashboard
     return matchesSearch && matchesStatus && matchesCategory;
   });
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <div className="pt-24 flex items-center justify-center">
+      <ProjectsLayout projects={projects} onCreateProject={() => setCreateProjectOpen(true)}>
+        <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
             <p className="text-muted-foreground">Loading...</p>
           </div>
         </div>
-      </div>
+      </ProjectsLayout>
     );
   }
 
   // Show dashboard for logged-in users
   if (user) {
     return (
-      <div className="min-h-screen bg-background">
+      <>
         <title>My Projects - Lens AI Studio</title>
         <meta name="description" content="Manage your AI-powered product photography projects. Create, edit, and track your professional product images." />
         
-        <Header />
-        <main className="pt-24 pb-12">
-          <div className="container mx-auto px-6">
-            {/* Dashboard Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-              <div>
-                <h1 className="text-3xl md:text-4xl font-bold bg-gradient-premium bg-clip-text text-transparent mb-2">
-                  My Projects
-                </h1>
-                <p className="text-muted-foreground">
-                  Manage and track your AI-powered product photography projects
-                </p>
-              </div>
-              <Button 
-                onClick={() => setCreateProjectOpen(true)}
-                className="bg-gradient-to-r from-primary via-primary-glow to-accent hover:shadow-glow transition-all duration-300 mt-4 md:mt-0"
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                New Project
-              </Button>
-            </div>
-
-            {/* Search and Filters */}
-            <div className="flex flex-col md:flex-row gap-4 mb-8">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                <Input
-                  placeholder="Search projects..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-full md:w-48">
-                  <Filter className="mr-2 h-4 w-4" />
-                  <SelectValue placeholder="Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="draft">Draft</SelectItem>
-                  <SelectItem value="processing">Processing</SelectItem>
-                  <SelectItem value="completed">Completed</SelectItem>
-                  <SelectItem value="failed">Failed</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-                <SelectTrigger className="w-full md:w-48">
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  <SelectItem value="jewelry">Jewelry</SelectItem>
-                  <SelectItem value="apparel">Apparel</SelectItem>
-                  <SelectItem value="electronics">Electronics</SelectItem>
-                  <SelectItem value="beauty">Beauty</SelectItem>
-                  <SelectItem value="home">Home & Decor</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Projects Grid */}
-            {filteredProjects.length > 0 ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProjects.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    onEdit={handleEditProject}
-                    onDelete={handleDeleteProject}
-                    onView={handleViewProject}
-                    onDownload={handleDownloadProject}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
-                  <FileText className="h-12 w-12 text-muted-foreground" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">No projects found</h3>
-                <p className="text-muted-foreground mb-6">
-                  {searchQuery || statusFilter !== 'all' || categoryFilter !== 'all' 
-                    ? "Try adjusting your search or filters"
-                    : "Create your first project to get started"
-                  }
-                </p>
-                <Button 
-                  onClick={() => setCreateProjectOpen(true)}
-                  className="bg-gradient-to-r from-primary via-primary-glow to-accent"
-                >
-                  <Plus className="mr-2 h-4 w-4" />
-                  Create Project
-                </Button>
-              </div>
-            )}
-          </div>
-        </main>
+        <ProjectsLayout projects={projects} onCreateProject={() => setCreateProjectOpen(true)}>
+          <ProjectsDashboard
+            projects={projects}
+            onCreateProject={() => setCreateProjectOpen(true)}
+            onEditProject={handleEditProject}
+            onDeleteProject={handleDeleteProject}
+            onViewProject={handleViewProject}
+            onDownloadProject={handleDownloadProject}
+          />
+        </ProjectsLayout>
 
         <CreateProjectDialog
           open={createProjectOpen}
@@ -258,7 +168,7 @@ const Projects = () => {
           onDelete={handleDeleteProject}
           onDownload={handleDownloadProject}
         />
-      </div>
+      </>
     );
   }
 
