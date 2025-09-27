@@ -13,9 +13,9 @@ export const ImagesLayout = ({ children, selectedTool, onToolSelect }: ImagesLay
     <SidebarProvider>
       <div className="min-h-screen flex w-full flex-col">
         <Header />
-        <div className="flex flex-1 pt-16">
+        <div className="flex min-h-0 flex-1 pt-16">
           <ImagesSidebar selectedTool={selectedTool} onToolSelect={onToolSelect} />
-          <main className="flex-1 overflow-hidden">
+          <main className="flex-1 min-h-0 overflow-hidden">
             {children}
           </main>
         </div>

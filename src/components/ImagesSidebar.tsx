@@ -102,7 +102,7 @@ export function ImagesSidebar({ selectedTool, onToolSelect }: ImagesSidebarProps
   ];
 
   return (
-    <Sidebar className={open ? "w-64" : "w-14"} collapsible="icon">
+    <Sidebar className={`${open ? "w-64" : "w-14"} z-20`} collapsible="icon">
       <SidebarTrigger className="m-2 self-end" />
       <SidebarContent className="space-y-4 pt-2">
         {/* Main Navigation */}
