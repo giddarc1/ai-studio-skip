@@ -18,7 +18,7 @@ import {
   Clock, 
   CheckCircle, 
   XCircle,
-  Loader,
+  RotateCcw,
   Calendar,
   Image,
   Tag,
@@ -58,7 +58,7 @@ const ProjectDetailsModal = ({
   const getStatusIcon = (status: Project['status']) => {
     switch (status) {
       case 'processing':
-        return <Loader className="h-4 w-4 animate-spin text-primary" />;
+        return <RotateCcw className="h-4 w-4 text-primary" />;
       case 'completed':
         return <CheckCircle className="h-4 w-4 text-green-500" />;
       case 'failed':
@@ -117,10 +117,10 @@ const ProjectDetailsModal = ({
                 </span>
               </DialogDescription>
             </div>
-            <Badge variant="outline" className={getStatusColor(project.status)}>
-              {getStatusIcon(project.status)}
-              <span className="ml-2 capitalize">{project.status}</span>
-            </Badge>
+                <Badge variant="outline" className={getStatusColor(project.status)}>
+                  {getStatusIcon(project.status)}
+                  <span className="ml-2">{project.status === 'processing' ? 'In Progress' : project.status.charAt(0).toUpperCase() + project.status.slice(1)}</span>
+                </Badge>
           </div>
         </DialogHeader>
 

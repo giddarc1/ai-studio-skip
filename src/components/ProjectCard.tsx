@@ -10,7 +10,7 @@ import {
   Clock, 
   CheckCircle, 
   XCircle,
-  Loader
+  RotateCcw
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -42,7 +42,7 @@ const ProjectCard = ({ project, onEdit, onDelete, onView, onDownload }: ProjectC
   const getStatusIcon = (status: Project['status']) => {
     switch (status) {
       case 'processing':
-        return <Loader className="h-4 w-4 animate-spin text-primary" />;
+        return <RotateCcw className="h-4 w-4 text-primary" />;
       case 'completed':
         return <CheckCircle className="h-4 w-4 text-green-500" />;
       case 'failed':
@@ -131,7 +131,7 @@ const ProjectCard = ({ project, onEdit, onDelete, onView, onDownload }: ProjectC
         <div className="flex items-center justify-between w-full">
           <Badge variant="outline" className={getStatusColor(project.status)}>
             {getStatusIcon(project.status)}
-            <span className="ml-2 capitalize">{project.status}</span>
+            <span className="ml-2">{project.status === 'processing' ? 'In Progress' : project.status.charAt(0).toUpperCase() + project.status.slice(1)}</span>
           </Badge>
           
           <div className="flex gap-2">

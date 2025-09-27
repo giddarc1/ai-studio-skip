@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ArrowLeft, Edit, Trash2, Download, Calendar, Image, Tag, CheckCircle, Clock, XCircle, Loader, Settings, Users, Eye } from "lucide-react";
+import { ArrowLeft, Edit, Trash2, Download, Calendar, Image, Tag, CheckCircle, Clock, XCircle, RotateCcw, Settings, Users, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -107,7 +107,7 @@ const ProjectDetail = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed': return <CheckCircle className="h-4 w-4" />;
-      case 'processing': return <Loader className="h-4 w-4 animate-spin" />;
+      case 'processing': return <RotateCcw className="h-4 w-4" />;
       case 'failed': return <XCircle className="h-4 w-4" />;
       default: return <Clock className="h-4 w-4" />;
     }
@@ -174,7 +174,7 @@ const ProjectDetail = () => {
                     <div className="flex items-center gap-2 mt-1">
                       <Badge className={getStatusColor(project.status)}>
                         {getStatusIcon(project.status)}
-                        <span className="ml-1 capitalize">{project.status}</span>
+                        <span className="ml-1">{project.status === 'processing' ? 'In Progress' : project.status.charAt(0).toUpperCase() + project.status.slice(1)}</span>
                       </Badge>
                       <Badge variant="outline">
                         <Tag className="h-3 w-3 mr-1" />
@@ -350,7 +350,7 @@ const ProjectDetail = () => {
                       <div className="text-center py-8">
                         <div className="flex justify-center mb-4">
                           {project.status === 'processing' ? (
-                            <Loader className="h-8 w-8 animate-spin text-primary" />
+                            <RotateCcw className="h-8 w-8 text-primary" />
                           ) : (
                             <Clock className="h-8 w-8 text-muted-foreground" />
                           )}
