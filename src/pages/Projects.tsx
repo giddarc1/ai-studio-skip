@@ -13,6 +13,7 @@ import {
 import Header from "@/components/Header";
 import ProjectCard from "@/components/ProjectCard";
 import CreateProjectDialog from "@/components/CreateProjectDialog";
+import ProjectDetailsModal from "@/components/ProjectDetailsModal";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import projectsHero from "@/assets/projects-hero.jpg";
@@ -70,6 +71,8 @@ const Projects = () => {
   const [statusFilter, setStatusFilter] = useState('all');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [createProjectOpen, setCreateProjectOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [projectDetailsOpen, setProjectDetailsOpen] = useState(false);
 
   const handleCreateProject = async (projectData: any) => {
     // In real app, this would create project via Supabase
@@ -101,11 +104,9 @@ const Projects = () => {
     });
   };
 
-  const handleViewProject = (project: any) => {
-    toast({
-      title: "View Project",
-      description: `Viewing ${project.name} - Feature coming soon!`,
-    });
+  const handleViewProject = (project: Project) => {
+    setSelectedProject(project);
+    setProjectDetailsOpen(true);
   };
 
   const handleDownloadProject = (project: any) => {
@@ -247,6 +248,15 @@ const Projects = () => {
           open={createProjectOpen}
           onOpenChange={setCreateProjectOpen}
           onCreateProject={handleCreateProject}
+        />
+
+        <ProjectDetailsModal
+          project={selectedProject}
+          open={projectDetailsOpen}
+          onOpenChange={setProjectDetailsOpen}
+          onEdit={handleEditProject}
+          onDelete={handleDeleteProject}
+          onDownload={handleDownloadProject}
         />
       </div>
     );
