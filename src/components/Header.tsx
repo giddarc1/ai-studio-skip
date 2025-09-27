@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles, User } from "lucide-react";
+import { Sparkles, User, LogOut, Settings, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   NavigationMenu,
@@ -10,9 +10,42 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/lib/supabase";
+import { useToast } from "@/hooks/use-toast";
 
 const Header = () => {
+  const { user, loading } = useAuth();
+  const { toast } = useToast();
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      
+      toast({
+        title: "Signed out successfully",
+        description: "You have been signed out of your account.",
+      });
+      
+      // Force page refresh to clear auth state
+      window.location.href = "/";
+    } catch (error: any) {
+      toast({
+        title: "Sign out failed",
+        description: error.message || "There was an error signing out.",
+        variant: "destructive",
+      });
+    }
+  };
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/40">
       <div className="container mx-auto px-6">
@@ -66,13 +99,53 @@ const Header = () => {
             </NavigationMenuList>
           </NavigationMenu>
 
-          {/* Sign In Button */}
-          <Button variant="outline" className="border-premium/30 text-premium hover:bg-premium/10 hover:border-premium/50" asChild>
-            <Link to="/sign-in">
-              <User className="w-4 h-4 mr-2" />
-              Sign In
-            </Link>
-          </Button>
+          {/* Auth Section */}
+          {loading ? (
+            <div className="w-8 h-8 rounded-full bg-muted animate-pulse" />
+          ) : user ? (
+            // User is authenticated - show user menu
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="border-premium/30 text-premium hover:bg-premium/10 hover:border-premium/50">
+                  <User className="w-4 h-4 mr-2" />
+                  {user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'}
+                  <ChevronDown className="w-3 h-3 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <div className="flex items-center justify-start gap-2 p-2">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">
+                      {user.user_metadata?.full_name || 'User'}
+                    </p>
+                    <p className="text-xs leading-none text-muted-foreground">
+                      {user.email}
+                    </p>
+                  </div>
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/projects" className="w-full">
+                    <Settings className="mr-2 h-4 w-4" />
+                    My Projects
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            // User is not authenticated - show sign in button
+            <Button variant="outline" className="border-premium/30 text-premium hover:bg-premium/10 hover:border-premium/50" asChild>
+              <Link to="/sign-in">
+                <User className="w-4 h-4 mr-2" />
+                Sign In
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </header>
