@@ -19,7 +19,9 @@ import {
   Camera,
   Sparkles,
   History,
-  FolderOpen
+  FolderOpen,
+  PanelLeftClose,
+  PanelLeftOpen
 } from "lucide-react";
 
 interface ImagesSidebarProps {
@@ -28,7 +30,7 @@ interface ImagesSidebarProps {
 }
 
 export function ImagesSidebar({ selectedTool, onToolSelect }: ImagesSidebarProps) {
-  const { open } = useSidebar();
+  const { open, toggleSidebar } = useSidebar();
   const [activeView, setActiveView] = useState('dashboard');
 
   const quickTools = [
@@ -99,8 +101,17 @@ export function ImagesSidebar({ selectedTool, onToolSelect }: ImagesSidebarProps
 
   return (
     <Sidebar className={open ? "w-64" : "w-14"} collapsible="icon">
-      <SidebarTrigger className="m-2 self-end" />
-      <SidebarContent className="space-y-4 pt-4">
+      {/* Sidebar Toggle */}
+      <div className="flex justify-between items-center p-2">
+        {open && (
+          <div className="text-xs text-muted-foreground px-2">
+            Press <kbd className="px-1 py-0.5 text-xs bg-muted rounded border font-mono">B</kbd> to toggle
+          </div>
+        )}
+        <SidebarTrigger className="h-8 w-8 ml-auto" />
+      </div>
+      
+      <SidebarContent className="space-y-4 pt-2">
         {/* Main Navigation */}
         <SidebarGroup>
           <SidebarGroupContent>
@@ -114,6 +125,7 @@ export function ImagesSidebar({ selectedTool, onToolSelect }: ImagesSidebarProps
                         ? "bg-primary text-primary-foreground" 
                         : "hover:bg-muted/50"
                     }`}
+                    tooltip={!open ? item.title : undefined}
                   >
                     <item.icon className="h-4 w-4" />
                     {open && <span className="ml-2">{item.title}</span>}
@@ -124,33 +136,34 @@ export function ImagesSidebar({ selectedTool, onToolSelect }: ImagesSidebarProps
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Generation Tools */}
-        {open && (
-          <SidebarGroup>
-            <SidebarGroupContent>
+        {/* Generation Tools - Show icons even when collapsed */}
+        <SidebarGroup>
+          <SidebarGroupContent>
+            {open && (
               <div className="text-xs font-medium text-muted-foreground mb-2 px-2">
                 Generate
               </div>
-              <SidebarMenu className="space-y-1">
-                {quickTools.map((tool) => (
-                  <SidebarMenuItem key={tool.id}>
-                    <SidebarMenuButton
-                      onClick={() => handleToolSelect(tool.id)}
-                      className={`w-full text-sm ${
-                        selectedTool === tool.id
-                          ? "bg-muted text-primary font-medium"
-                          : "hover:bg-muted/50"
-                      }`}
-                    >
-                      <tool.icon className="h-4 w-4" />
-                      <span className="ml-2">{tool.title}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        )}
+            )}
+            <SidebarMenu className="space-y-1">
+              {quickTools.map((tool) => (
+                <SidebarMenuItem key={tool.id}>
+                  <SidebarMenuButton
+                    onClick={() => handleToolSelect(tool.id)}
+                    className={`w-full text-sm ${
+                      selectedTool === tool.id
+                        ? "bg-muted text-primary font-medium"
+                        : "hover:bg-muted/50"
+                    }`}
+                    tooltip={!open ? tool.title : undefined}
+                  >
+                    <tool.icon className="h-4 w-4" />
+                    {open && <span className="ml-2">{tool.title}</span>}
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
     </Sidebar>
   );
