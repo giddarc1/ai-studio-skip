@@ -11,11 +11,11 @@ interface ImagesLayoutProps {
 export const ImagesLayout = ({ children, selectedTool, onToolSelect }: ImagesLayoutProps) => {
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full flex-col">
-        <Header />
-        <div className="flex flex-1 pt-16">
-          <ImagesSidebar selectedTool={selectedTool} onToolSelect={onToolSelect} />
-          <main className="flex-1 overflow-hidden">
+      <div className="min-h-screen flex w-full">
+        <ImagesSidebar selectedTool={selectedTool} onToolSelect={onToolSelect} />
+        <div className="flex-1 flex flex-col">
+          <Header />
+          <main className="flex-1 pt-16 overflow-auto">
             {children}
           </main>
         </div>

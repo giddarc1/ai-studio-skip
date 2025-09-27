@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles, User, LogOut, Settings, ChevronDown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Sparkles, User, LogOut, Settings, ChevronDown, Menu } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -17,6 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/lib/supabase";
@@ -25,6 +26,9 @@ import { useToast } from "@/hooks/use-toast";
 const Header = () => {
   const { user, loading } = useAuth();
   const { toast } = useToast();
+  const location = useLocation();
+  
+  const isImagesPage = location.pathname === '/images';
 
   const handleSignOut = async () => {
     try {
@@ -50,8 +54,14 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/40">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <div className="flex items-center gap-4">
+            {/* Sidebar Toggle - only show on images page when user is logged in */}
+            {isImagesPage && user && (
+              <SidebarTrigger />
+            )}
+            
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
               <div className="w-10 h-10 bg-gradient-premium rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                 <Sparkles className="w-6 h-6 text-white" />
@@ -61,7 +71,8 @@ const Header = () => {
             <span className="text-2xl font-bold bg-gradient-premium bg-clip-text text-transparent">
               Glo AI Studio
             </span>
-          </Link>
+            </Link>
+          </div>
 
           {/* Navigation Menu */}
           <NavigationMenu>
