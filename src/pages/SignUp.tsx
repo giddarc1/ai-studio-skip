@@ -55,9 +55,17 @@ const SignUp = () => {
       });
 
       if (error) {
-        if (error.message.includes('not configured')) {
+        if (error.message === 'Supabase not configured') {
           toast({
             title: "Sign up not available",
+            description: "Supabase needs to be properly configured to create accounts. Please set up your Supabase project first.",
+            variant: "destructive",
+          });
+          return;
+        }
+        if (error.message.includes('email') && error.message.includes('confirmation')) {
+          toast({
+            title: "Email confirmation required",
             description: "Email confirmation needs to be configured in Supabase settings.",
             variant: "destructive",
           });
@@ -102,9 +110,15 @@ const SignUp = () => {
       });
 
       if (error) {
-        if (error.message.includes('not configured')) {
+        if (error.message === 'Supabase not configured') {
           toast({
             title: "Google Sign-Up Not Available",
+            description: "Supabase needs to be properly configured first. Please set up your Supabase project and Google OAuth.",
+            variant: "destructive",
+          });
+        } else if (error.message.includes('oauth') || error.message.includes('provider')) {
+          toast({
+            title: "Google OAuth Not Configured",
             description: "Google OAuth needs to be configured in your Supabase project settings.",
             variant: "destructive",
           });
